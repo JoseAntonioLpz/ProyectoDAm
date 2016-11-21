@@ -2,7 +2,7 @@
 ### ¿ Que es Quip ?
 Quip es una aplicación para teléfonos Android con la que podrás anotar todo lo que quieras en cualquier momento.
 
-### Caracteristicas
+### Características
 Con Quip puedes crear notas y listas y puedes añadir los siguientes elementos:
 <ul>
 <li>Imágenes.</li>
@@ -22,9 +22,9 @@ Con Quip puedes guardar tus notas en PDF para que no las pierdas nunca y puedas 
 
 ### Autores
 <ul>
-<li>Autor 1</li>
-<li>Autor 2</li>
-<li>Autor 3</li>
+<li>Jose Antonio López</li>
+<li>Pablo Maciá</li>
+<li>Sergio Marín</li>
 </ul>
 ### Contacto
 grupo5dam2@gmail.com
