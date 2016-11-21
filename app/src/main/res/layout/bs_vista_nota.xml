@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:weightSum="1"
+    android:id="@+id/bottomSheetPrueba">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:padding="16dp"
+        android:text="@string/tituloBSVistaNota" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_menu_camera"
+            android:id="@+id/imageView2"
+            android:layout_weight="1"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" />
+
+        <Button
+            android:text="@string/BtAddFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btAddFoto"
+            android:layout_weight="2.39"
+            android:background="@android:color/transparent"
+            android:textAlignment="textStart"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_menu_gallery"
+            android:id="@+id/imageView3"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
+        <Button
+            android:text="@string/BtAddGaleria"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/btAddGaleria"
+            android:layout_weight="2.41"
+            android:background="@android:color/transparent"
+            android:elegantTextHeight="true"
+            android:textAlignment="textStart"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+    </LinearLayout>
+
+</LinearLayout>
