@@ -16,9 +16,9 @@ Con Quip puedes crear notas y listas y puedes añadir los siguientes elementos:
 ### No pierdas tus notas
 Con Quip puedes guardar tus notas en PDF para que no las pierdas nunca y puedas verlas en cualquier dispositivo.
 
-<img src="capturas/captura1.jpeg" height="128">
-<img src="capturas/captura2.jpeg" height="128">
-<img src="capturas/captura3.jpeg" height="128">
+<img src="capturas/captura1.jpeg" height="400">
+<img src="capturas/captura2.jpeg" height="400">
+<img src="capturas/captura3.jpeg" height="400">
 
 ### Autores
 <ul>
