@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.izv.dam.newquip.contrato.ContratoNotaLista;
 import com.izv.dam.newquip.pojo.Nota;
+import com.izv.dam.newquip.pojo.Tarea;
 
 /**
  * Created by dam on 25/10/2016.
@@ -45,5 +46,10 @@ public class PresentadorNotaLista implements ContratoNotaLista.InterfacePresenta
     public void onAddTarea(Nota n) {
         this.modelo.saveNota(n);
         this.vista.mostrarNota(n);
+    }
+
+    @Override
+    public void onRemoveTarea(Tarea t) {
+        this.modelo.removeTarea(t);
     }
 }

@@ -76,6 +76,16 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
         return r;
     }
 
+    @Override
+    public void removeTarea(Tarea t) {
+        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
+        cr.delete(
+                uri,
+                "",
+                new String[]{}
+        );
+    }
+
     private long deleteNota(Nota n) {
         Log.v("ModeloNotaLista", "deleteNota id: " + n.getId());
         /*for (Tarea t: n.getTareas()){

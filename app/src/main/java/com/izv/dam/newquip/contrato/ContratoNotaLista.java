@@ -1,6 +1,7 @@
 package com.izv.dam.newquip.contrato;
 
 import com.izv.dam.newquip.pojo.Nota;
+import com.izv.dam.newquip.pojo.Tarea;
 
 public interface ContratoNotaLista {
 
@@ -10,6 +11,8 @@ public interface ContratoNotaLista {
         Nota getNota(long id);
 
         long saveNota(Nota n);
+
+        void removeTarea(Tarea t);
 
         interface OnDataLoadListener {
             void setNota(Nota n);
@@ -26,6 +29,7 @@ public interface ContratoNotaLista {
 
         void onAddTarea(Nota n);
 
+        void onRemoveTarea(Tarea t);
     }
 
     interface InterfaceVista {
