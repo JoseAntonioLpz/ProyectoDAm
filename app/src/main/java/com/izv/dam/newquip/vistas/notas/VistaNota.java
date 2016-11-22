@@ -198,6 +198,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                     }
                     try {
                         fOut = new FileOutputStream(file);
+                        Bitmap b = c.redimension(data1 , 300, 169);
                         data1.compress(Bitmap.CompressFormat.JPEG, 85, fOut); // saving the Bitmap to a file compressed as a JPEG with 85% compression rate
                         try {
                             fOut.flush(); // Not really required
