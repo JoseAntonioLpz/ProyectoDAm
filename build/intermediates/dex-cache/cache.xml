@@ -12,6 +12,177 @@
     </item>
     <item
         is-multidex="true"
+        jar="C:\Users\Pablo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_9f21fced833ea3886c69d417792c0236b4c726ca\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_382a970c676c6fc387fe1d39b1fbb7203924eba5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_b07ffaa7e341c5f88a96f2dd892251d9f274eba5\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_a204bfa1d1902f8bdc92538c6344eab3998fe3fc\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_99b88ccc89a24d7081cd68ae7ea62d18d49cd489\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_951d5860dec6bfc890e2f1273435cc6abab7883b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_483a302ecae3c5cbaa97d14cf20b9ef11c9f01f3\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_bbef4d2b025b0b309ec6384002059a6cc12613f9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_e760291c6fb6924f106e449f43256ec289957b9c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_6b05f748a9da908c6424988b23bac3be31d5803c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\.gradle\caches\modules-2\files-2.1\com.itextpdf.tool\xmlworker\5.5.10\4f9dd1936d1163639c08619631313e3ae4778e49\xmlworker-5.5.10.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="4f9dd1936d1163639c08619631313e3ae4778e49">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\xmlworker-5.5.10_dc05facda468accf5571bf0cc2420bd5b3e7ab9c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_9852d12d96dfc488d75293db42a10cade200bc77\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_f64a8dd86cdae450384a60451eed9dbdac48d517\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="14c6d5253341e58fc6a86c4cecba761075919ffd">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_df69cd6404f36b4fcfacbc7a697a76c0fd8b510c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_c00f0c8aab088d98ba51570e550e2cb40ae4ed9d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_646c94b5065fab52649b42e23b3069993bb04b41\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c304beaad04b87ac6ae1191c73263f9fd78e4400\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-24.2.1_401d327601a82d9d323cd8ff4674ace3fb0fcf8c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_823789dca40c05e3ad97159576238f66bd6f8ee9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\design\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -57,15 +228,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Pablo\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\24.2.1\support-annotations-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-24.2.1_9f21fced833ea3886c69d417792c0236b4c726ca\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
@@ -79,26 +241,8 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="338783e2d2920b3fcd6b4b55887a7d09e8ab48e0">
+        sha1="7209e0f3e14f94006886e935447459e11339c10b">
         <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_6074c82d6e1961bc942c20f7f3dcf2d06051cb99\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-media-compat-24.2.1_382a970c676c6fc387fe1d39b1fbb7203924eba5\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="7521486d9bfd2cd9e756e0cf75ed7d97f2ce2d3b">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-recyclerview-v7-24.2.1_b07ffaa7e341c5f88a96f2dd892251d9f274eba5\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -111,57 +255,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-fragment-24.2.1_a204bfa1d1902f8bdc92538c6344eab3998fe3fc\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_99b88ccc89a24d7081cd68ae7ea62d18d49cd489\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
         <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-24.2.1_0f2ed14effcffc4500c0f7645723173a5338137a\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_951d5860dec6bfc890e2f1273435cc6abab7883b\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_483a302ecae3c5cbaa97d14cf20b9ef11c9f01f3\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-24.2.1_bbef4d2b025b0b309ec6384002059a6cc12613f9\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -183,15 +282,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-ui-24.2.1_e760291c6fb6924f106e449f43256ec289957b9c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\24.2.1\jars\libs\internal_impl-24.2.1.jar"
         jumboMode="true"
         optimize="true"
@@ -210,15 +300,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-vector-drawable-24.2.1_6b05f748a9da908c6424988b23bac3be31d5803c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -234,33 +315,6 @@
         revision="24.0.2"
         sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
         <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_68d024da6529218f8aeedf9734040cd59a0bd37f\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\.gradle\caches\modules-2\files-2.1\com.itextpdf.tool\xmlworker\5.5.10\4f9dd1936d1163639c08619631313e3ae4778e49\xmlworker-5.5.10.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="4f9dd1936d1163639c08619631313e3ae4778e49">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\xmlworker-5.5.10_dc05facda468accf5571bf0cc2420bd5b3e7ab9c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-core-utils-24.2.1_9852d12d96dfc488d75293db42a10cade200bc77\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_f64a8dd86cdae450384a60451eed9dbdac48d517\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -300,15 +354,6 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="34e44eb572529518fdcb3f3de8b04d01cc1b2dab">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_df69cd6404f36b4fcfacbc7a697a76c0fd8b510c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
@@ -318,39 +363,12 @@
     </item>
     <item
         is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-animated-vector-drawable-24.2.1_c00f0c8aab088d98ba51570e550e2cb40ae4ed9d\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-24.2.1_646c94b5065fab52649b42e23b3069993bb04b41\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
         jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-compat\24.2.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
         sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
         <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-compat-24.2.1_8b029297c2be282b877e773e7f46453581489e49\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_c304beaad04b87ac6ae1191c73263f9fd78e4400\classes.dex" />
     </item>
     <item
         is-multidex="true"
@@ -369,24 +387,6 @@
         revision="24.0.2"
         sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
         <dex dex="C:\Users\Pablo\Desktop\GIT\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_9729f415a6b115ee65e57807639f2218c0d2e639\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\24.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="c5e6490573cd2cc8018417f60ddd251138b6ed61">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-cardview-v7-24.2.1_401d327601a82d9d323cd8ff4674ace3fb0fcf8c\classes.dex" />
-    </item>
-    <item
-        is-multidex="true"
-        jar="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\exploded-aar\com.android.support\support-fragment\24.2.1\jars\libs\internal_impl-24.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="24.0.2"
-        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
-        <dex dex="C:\Users\Pablo\Desktop\ProyectoDAM\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-24.2.1_823789dca40c05e3ad97159576238f66bd6f8ee9\classes.dex" />
     </item>
 
 </items>

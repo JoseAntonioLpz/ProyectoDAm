@@ -13,22 +13,18 @@ import com.izv.dam.newquip.pojo.Nota;
 
 public class ModeloNota implements ContratoNota.InterfaceModelo {
 
-    //private GestionNota gn = null;
     private ContentResolver cr;
 
     public ModeloNota(Context c) {
-        //gn = new GestionNota(c);
         cr = c.getContentResolver();
     }
 
     @Override
     public void close() {
-        //gn.close();
     }
 
     @Override
     public Nota getNota(long id) {
-        //return gn.get(id);
         Log.v("ModeloNota", "getNota(), id: " + id);
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, id);
         Cursor c = cr.query(
@@ -54,7 +50,6 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
     }
 
     private long deleteNota(Nota n) {
-        //return gn.delete(n);
         Log.v("ModeloNota", "deleteNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
         return cr.delete(
@@ -66,10 +61,6 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
 
     private long insertNota(Nota n) {
         Log.v("ModeloNota", "insertNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
-        /*if(n.getNota().trim().compareTo("")==0 && n.getTitulo().trim().compareTo("")==0) {
-            return 0;
-        }
-        return gn.insert(n);*/
         if(n.getNota().trim().compareTo("")==0 && n.getTitulo().trim().compareTo("")==0) {
             this.deleteNota(n);
             return 0;
@@ -82,12 +73,6 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
 
     private int updateNota(Nota n) {
         Log.v("ModeloNota", "updateNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
-        /*if(n.getNota().trim().compareTo("")==0 && n.getTitulo().trim().compareTo("")==0) {
-            this.deleteNota(n);
-            gn.delete(n);
-            return 0;
-        }
-        return gn.update(n);*/
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
         if(n.getNota().trim().compareTo("")==0 && n.getTitulo().trim().compareTo("")==0) {
             this.deleteNota(n);

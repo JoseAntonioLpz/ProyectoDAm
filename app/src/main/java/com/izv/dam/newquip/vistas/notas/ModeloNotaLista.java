@@ -18,28 +18,19 @@ import com.izv.dam.newquip.pojo.Tarea;
 
 public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
-    //private GestionNota gn = null;
-    //private GestionTareas gt = null;
     private ContentResolver cr;
 
     public ModeloNotaLista(Context c){
-        //gn = new GestionNota(c);
-        //gt = new GestionTareas(c);
         cr = c.getContentResolver();
     }
 
     @Override
     public void close() {
-        //gt.close();
-        //gn.close();
     }
 
     @Override
     public Nota getNota(long id) {
         Log.v("ModeloNotaLista", "getNota id: " + id);
-        /*Nota n = gn.get(id);
-        n.setTareas(gt.getByNota(id));
-        return n;*/
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, id);
         Cursor c = cr.query(
                 uri,
@@ -88,10 +79,6 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     private long deleteNota(Nota n) {
         Log.v("ModeloNotaLista", "deleteNota id: " + n.getId());
-        /*for (Tarea t: n.getTareas()){
-            gt.delete(t);
-        }
-        return gn.delete(n);*/
         for (Tarea t: n.getTareas()){
             Uri u = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
             cr.delete(
@@ -111,18 +98,6 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     private long insertNota(Nota n) {
         Log.v("ModeloNotaLista", "insertNota id: " + n.getId());
-        /*if(n.getTitulo().trim().compareTo("")==0 && n.getTareas().size() == 0) {
-            return 0;
-        }
-        for (Tarea t: n.getTareas()) {
-            if(t.getId() == 0){
-                t.setIdNota(n.getId());
-                gt.insert(t);
-            }else{
-                gt.update(t);
-            }
-        }
-        return gn.insert(n);*/
         if(n.getTitulo().trim().compareTo("") == 0) {
             this.deleteNota(n);
             for (Tarea t : n.getTareas()) {
@@ -149,20 +124,6 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     private long updateNota(Nota n) {
         Log.v("ModeloNotaLista", "updateNota id: " + n.getId());
-        /*if(n.getTitulo().trim().compareTo("")==0) {
-            this.deleteNota(n);
-            gn.delete(n);
-            return 0;
-        }
-        for (Tarea t : n.getTareas()){
-            if(t.getId() == 0){
-                t.setIdNota(n.getId());
-                gt.insert(t);
-            }else{
-                gt.update(t);
-            }
-        }
-        return gn.update(n);*/
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
         if(n.getTitulo().trim().compareTo("") == 0) {
             this.deleteNota(n);

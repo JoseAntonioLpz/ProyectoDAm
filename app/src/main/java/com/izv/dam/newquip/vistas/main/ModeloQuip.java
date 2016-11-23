@@ -23,7 +23,6 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     @Override
     public void close() {
         cursor.close();
-        //gn.close();
     }
 
     @Override
@@ -61,29 +60,14 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     @Override
     public void loadData(OnDataLoadListener listener) {
         Log.v("ModeloQuip", "loadData");
-        /*Uri uri = Uri.parse("content://" + ContratoBaseDatos.AUTHORITY + "/JOIN");*/
         cursor = cr.query(
-                ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA/*uri*/,
+                ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                 null,
                 null,
                 null,
                 "2, 1"// ordena por el segundo campo, y en caso de empate por el primero
         );
-        /*if(cursor.moveToFirst()) {
-            String columnsNames = "";
-            for (int i = 0; i < cursor.getColumnCount(); i++) {
-                columnsNames += String.format("%-20s,", cursor.getColumnName(i));
-            }
-            Log.v("data: ", columnsNames);
-            cursor.moveToFirst();
-            do {
-                String out = "";
-                for (int i = 0; i < cursor.getColumnCount(); i++) {
-                    out += String.format("%-20s,", cursor.getString(i));
-                }
-                Log.v("data: ", out);
-            } while (cursor.moveToNext());
-        }*/
+
         Cursor cursor2 = cr.query(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
                 null,
                 null,

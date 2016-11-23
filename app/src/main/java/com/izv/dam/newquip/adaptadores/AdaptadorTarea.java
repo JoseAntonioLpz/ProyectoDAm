@@ -21,7 +21,6 @@ import java.util.List;
 
 public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHolderTarea>{
     private List<Tarea> list;
-    //private OnItemClickListener listener;
     private OnCaretUpdateListener caretListener;
     private OnCheckBoxClickListener checkBoxListener;
 
@@ -40,16 +39,6 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
     public void setOnCheckBoxClickListener(OnCheckBoxClickListener listener){
         this.checkBoxListener = listener;
     }
-
-    /*public interface OnItemClickListener {
-        void onItemClick(int i);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        this.listener = listener;
-    }*/
-
-
 
     public static class ViewHolderTarea extends RecyclerView.ViewHolder {
         public CheckBox cbRealizado;
@@ -85,15 +74,6 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
                 }
             });
         }
-
-        /*public void bind(final int i, final OnItemClickListener listener){
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(i);
-                }
-            });
-        }*/
     }
 
     public AdaptadorTarea(List<Tarea> list){

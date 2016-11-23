@@ -207,7 +207,8 @@ public class Nota  implements Parcelable{
 
         if(c.moveToFirst()){
             do{
-                tareas.add(Tarea.getTarea(c));
+                if(c.getLong(c.getColumnIndex(ContratoBaseDatos.TablaTareas.ID_NOTA)) == this.id)
+                    tareas.add(Tarea.getTarea(c));
             }while(c.moveToNext());
         }
     }
