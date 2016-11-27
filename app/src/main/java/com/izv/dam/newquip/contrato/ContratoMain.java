@@ -8,63 +8,54 @@ public interface ContratoMain {
 
     interface InterfaceModelo {
 
-        void close();
+        void updateNota(int position, boolean value);
 
         long deleteNota(int position);
 
-        long deleteNota(Nota n);
-
         Nota getNota(int position);
 
-        void setCursor(Cursor c);
+        Cursor loadCursorNotas(int tipo);
 
-        interface OnDataLoadListener {
-            void setCursor(Cursor c1, Cursor c2);
-        }
+        Cursor loadCursorTareas();
 
-        void loadData(OnDataLoadListener listener);
+        void setCursorNotas(Cursor cursorNotas);
 
-        void updateNota(Nota n);
+        Cursor getCursorNotas();
 
-        Cursor changeCursor(int tipo);
+        void setCursorTareas(Cursor cursorTareas);
+
+        Cursor getCursorTareas();
+
+        void close();
     }
 
     interface InterfacePresentador {
-
-        void onAddNota(int tipo);
-
-        void onDeleteNota(int position);
-
-        void onDeleteNota(Nota n);
-
-        void onCancelDeleteNota();
-
-        void onEditNota(int position);
-
-        void onEditNota(Nota n);
 
         void onPause();
 
         void onResume();
 
-        void onShowBorrarNota(int position);
+        void onAddNota(int tipo);
 
-        Cursor onChangeCursor(int tipo);
+        void onEditNota(int position);
 
-        void onUpdateRealizado(int i, boolean isChecked);
+        void onDeleteNota(int position);
 
-        void onSetCursor(Cursor c);
+        void onUpdateNota(int position, boolean value);
+
+        void onLoadCursorNotas(int filter);
+
     }
 
     interface InterfaceVista {
 
-        void mostrarAgregarNota(int tipo);
+        void showAddNota(int tipo);
 
-        void mostrarDatos(Cursor c1, Cursor c2);
+        void showEditNota(Nota nota);
 
-        void mostrarEditarNota(Nota n);
+        void showConfirmDeleteNota(Nota n);
 
-        void mostrarConfirmarBorrarNota(Nota n);
+        void showNotas(Cursor cursorNotas, Cursor cursoTareas);
 
     }
 

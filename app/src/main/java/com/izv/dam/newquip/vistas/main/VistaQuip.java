@@ -15,13 +15,11 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.izv.dam.newquip.R;
 import com.izv.dam.newquip.adaptadores.AdaptadorNota;
 import com.izv.dam.newquip.contrato.ContratoMain;
-import com.izv.dam.newquip.dialogo.DialogoBorrar;
 import com.izv.dam.newquip.dialogo.OnBorrarDialogListener;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.vistas.notas.VistaNota;
@@ -51,15 +49,15 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
 
         adaptador.setOnItemClickListener(new AdaptadorNota.OnItemClickListener() {
             @Override
-            public void onItemClick(int i) {
-                presentador.onEditNota(i);
+            public void onItemClick(int position) {
+                presentador.onEditNota(position);
             }
         });
 
         adaptador.setOnCheckBoxClickListener(new AdaptadorNota.OnCheckBoxClickListener() {
             @Override
-            public void onCheckBoxClick(int i, boolean value) {
-                presentador.onUpdateRealizado(i, value);
+            public void onCheckBoxClick(int position, boolean value) {
+                presentador.onUpdateNota(position, value);
             }
         });
 
@@ -72,7 +70,8 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int swipedPosition = viewHolder.getAdapterPosition();
-                presentador.onShowBorrarNota(swipedPosition);
+                presentador.onDeleteNota(swipedPosition);
+                adaptador.notifyItemRemoved(swipedPosition);
             }
         };
 
@@ -87,10 +86,6 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
             @Override
             public void onClick(View view) {
                 presentador.onAddNota(Nota.NOTA_SIMPLE);
-                /*BottomSheetDialogFragment bsdFragment =
-                        BottomSheetVistaQuip.newInstance();
-                Toast.makeText(VistaQuip.this, "Visualizar notas", Toast.LENGTH_SHORT).show();
-                bsdFragment.show(VistaQuip.this.getSupportFragmentManager(), "BSDialog");*/
             }
         });
         FloatingActionButton fab2 = (FloatingActionButton) findViewById(R.id.add_lista);
@@ -100,10 +95,8 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
             @Override
             public void onClick(View view) {
                 presentador.onAddNota(Nota.NOTA_LISTA);
-                Toast.makeText(VistaQuip.this, "add_lista", Toast.LENGTH_SHORT).show();
             }
         });
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -127,93 +120,81 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
         super.onResume();
     }
 
-
-
-    @Override
-    public void mostrarAgregarNota(int tipo) {
-        Toast.makeText(VistaQuip.this, "add", Toast.LENGTH_SHORT).show();
-        Intent i = null;
-        if (tipo == Nota.NOTA_SIMPLE){
-            i = new Intent(this, VistaNota.class);
-        }else if(tipo == Nota.NOTA_LISTA){
-            i = new Intent(this, VistaNotaLista.class);
-        }
-        startActivity(i);
-    }
-
-    @Override
-    public void mostrarDatos(Cursor c1, Cursor c2) {
-        adaptador.changeCursor(c1);
-        adaptador.setCursorTareas(c2);
-    }
-
-    @Override
-    public void mostrarEditarNota(Nota n) {
-        Toast.makeText(VistaQuip.this, "edit", Toast.LENGTH_SHORT).show();
-        Intent i = null;
-        if (n.getTipo() == Nota.NOTA_SIMPLE){
-            i = new Intent(this, VistaNota.class);
-        }else if(n.getTipo() == Nota.NOTA_LISTA){
-            i = new Intent(this, VistaNotaLista.class);
-        }
-        Bundle b = new Bundle();
-        n.setTareas(adaptador.getCursorTareas());
-        b.putParcelable("nota", n);
-        i.putExtras(b);
-        if(n.getTipo() == Nota.NOTA_LISTA)
-            i.putParcelableArrayListExtra("tareas", (ArrayList<? extends Parcelable>) n.getTareas());
-        startActivity(i);
-    }
-
-    @Override
-    public void mostrarConfirmarBorrarNota(Nota n) {
-        DialogoBorrar fragmentBorrar = DialogoBorrar.newInstance(n);
-        fragmentBorrar.show(getSupportFragmentManager(), "Dialogo borrar");
-
-    }
-
     @Override
     public void onBorrarPossitiveButtonClick(Nota n) {
-        presentador.onDeleteNota(n);
+
     }
 
     @Override
     public void onBorrarNegativeButtonClick() {
-        presentador.onCancelDeleteNota();
+
     }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        if (id == R.id.nav_all) {
-            Toast.makeText(VistaQuip.this, "Todas", Toast.LENGTH_SHORT).show();
-            Cursor c = presentador.onChangeCursor(-1);
-            adaptador.changeCursor(c);
-        }else if (id == R.id.nav_notas) {
-            Toast.makeText(VistaQuip.this, "Visualizar notas", Toast.LENGTH_SHORT).show();
-            Cursor c = presentador.onChangeCursor(Nota.NOTA_SIMPLE);
-            adaptador.changeCursor(c);
-        } else if (id == R.id.nav_listas) {
-            Toast.makeText(VistaQuip.this, "Visualizar listas", Toast.LENGTH_SHORT).show();
-            Cursor c = presentador.onChangeCursor(Nota.NOTA_LISTA);
-            adaptador.changeCursor(c);
-        } else if (id == R.id.nav_recordatorios) {
-            Toast.makeText(VistaQuip.this, "Recordatorios", Toast.LENGTH_SHORT).show();
-            Cursor c = presentador.onChangeCursor(-1);
-            adaptador.changeCursor(c);
-        } else if (id == R.id.nav_completadas) {
-            Toast.makeText(VistaQuip.this, "Completadas", Toast.LENGTH_SHORT).show();
-            Cursor c = presentador.onChangeCursor(3);
-            adaptador.changeCursor(c);
-        } else if (id == R.id.nav_no_completadas) {
-            Toast.makeText(VistaQuip.this, "No completadas", Toast.LENGTH_SHORT).show();
-            Cursor c = presentador.onChangeCursor(4);
-            adaptador.changeCursor(c);
-        }
 
+        if (id == R.id.nav_all) {
+            presentador.onLoadCursorNotas(0);
+        }else if (id == R.id.nav_notas) {
+            presentador.onLoadCursorNotas(1);
+        } else if (id == R.id.nav_listas) {
+            presentador.onLoadCursorNotas(2);
+        } else if (id == R.id.nav_recordatorios) {
+            presentador.onLoadCursorNotas(3);
+        } else if (id == R.id.nav_completadas) {
+            presentador.onLoadCursorNotas(4);
+        } else if (id == R.id.nav_no_completadas) {
+            presentador.onLoadCursorNotas(5);
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void showAddNota(int tipo) {
+        if(tipo == Nota.NOTA_SIMPLE || tipo == Nota.NOTA_LISTA) {
+            Nota nota = new Nota();
+            nota.setTipo(tipo);
+            Intent intent = null;
+            if(tipo == Nota.NOTA_SIMPLE){
+                intent = new Intent(this, VistaNota.class);
+            }else if(tipo == Nota.NOTA_LISTA){
+                intent = new Intent(this, VistaNotaLista.class);
+                intent.putParcelableArrayListExtra("tareas", (ArrayList<? extends Parcelable>) nota.getTareas());
+            }
+            if(intent != null) {
+                intent.putExtra("nota", nota);
+                startActivity(intent);
+            }
+        }
+    }
+
+    @Override
+    public void showEditNota(Nota nota) {
+        Intent intent = null;
+        if(nota.getTipo() == Nota.NOTA_SIMPLE){
+            intent = new Intent(this, VistaNota.class);
+        }else if(nota.getTipo() == Nota.NOTA_LISTA){
+            intent = new Intent(this, VistaNotaLista.class);
+            intent.putParcelableArrayListExtra("tareas", (ArrayList<? extends Parcelable>) nota.getTareas());
+        }
+        if(intent != null) {
+            intent.putExtra("nota", nota);
+            startActivity(intent);
+        }
+    }
+
+    @Override
+    public void showConfirmDeleteNota(Nota n) {
+
+    }
+
+    @Override
+    public void showNotas(Cursor cursorNotas, Cursor cursoTareas) {
+        adaptador.changeCursorTareas(cursoTareas);
+        adaptador.changeCursorNotas(cursorNotas);
     }
 }

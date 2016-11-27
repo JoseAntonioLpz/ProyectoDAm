@@ -1,92 +1,60 @@
 package com.izv.dam.newquip.vistas.main;
 
 import android.content.Context;
-import android.database.Cursor;
 
 import com.izv.dam.newquip.contrato.ContratoMain;
-import com.izv.dam.newquip.pojo.Nota;
 
 public class PresentadorQuip implements ContratoMain.InterfacePresentador{
 
-    private ContratoMain.InterfaceModelo.OnDataLoadListener oyente;
     private ContratoMain.InterfaceModelo modelo;
     private ContratoMain.InterfaceVista vista;
 
     public PresentadorQuip(ContratoMain.InterfaceVista vista) {
         this.vista = vista;
         this.modelo = new ModeloQuip((Context)vista);
-        oyente = new ContratoMain.InterfaceModelo.OnDataLoadListener() {
-            @Override
-            public void setCursor(Cursor c1, Cursor c2) {
-                PresentadorQuip.this.vista.mostrarDatos(c1, c2);
-            }
-        };
-    }
-
-    @Override
-    public void onAddNota(int tipo) {
-        this.vista.mostrarAgregarNota(tipo);
-    }
-
-    @Override
-    public void onDeleteNota(Nota n) {
-        this.modelo.deleteNota(n);
-        this.modelo.loadData(oyente);
-    }
-
-    @Override
-    public void onCancelDeleteNota() {
-        this.modelo.loadData(oyente);
-    }
-
-    @Override
-    public void onEditNota(Nota n) {
-        this.vista.mostrarEditarNota(n);
     }
 
     @Override
     public void onPause() {
+        this.modelo.close();
     }
 
     @Override
     public void onResume() {
-        this.modelo.loadData(oyente);
+        if(this.modelo.getCursorNotas() == null && this.modelo.getCursorTareas() == null) {
+            this.vista.showNotas(
+                    this.modelo.loadCursorNotas(0),
+                    this.modelo.loadCursorTareas()
+            );
+        } else {
+            this.vista.showNotas(this.modelo.getCursorNotas(), this.modelo.getCursorTareas());
+        }
     }
 
     @Override
-    public void onShowBorrarNota(int position) {
-        Nota n = this.modelo.getNota(position);
-        this.vista.mostrarConfirmarBorrarNota(n);
+    public void onAddNota(int tipo) {
+        this.vista.showAddNota(tipo);
+    }
+
+    @Override
+    public void onEditNota(int position) {
+        this.vista.showEditNota(this.modelo.getNota(position));
     }
 
     @Override
     public void onDeleteNota(int position) {
         this.modelo.deleteNota(position);
-        this.modelo.loadData(oyente);
+        this.vista.showNotas(this.modelo.getCursorNotas(), this.modelo.getCursorTareas());
     }
 
     @Override
-    public void onEditNota(int position) {
-        Nota n = this.modelo.getNota(position);
-        this.onEditNota(n);
+    public void onUpdateNota(int position, boolean value) {
+        this.modelo.updateNota(position, value);
+        this.vista.showNotas(this.modelo.getCursorNotas(), this.modelo.getCursorTareas());
     }
 
     @Override
-    public void onSetCursor(Cursor c){
-        modelo.setCursor(c);
+    public void onLoadCursorNotas(int filter) {
+        this.vista.showNotas(this.modelo.loadCursorNotas(filter), this.modelo.getCursorTareas());
     }
-
-    @Override
-    public Cursor onChangeCursor(int tipo){
-        return modelo.changeCursor(tipo);
-    }
-
-    @Override
-    public void onUpdateRealizado(int i, boolean isChecked) {
-        Nota n = this.modelo.getNota(i);
-        n.setRealizado(isChecked);
-        this.modelo.updateNota(n);
-        this.modelo.loadData(oyente);
-    }
-
 }

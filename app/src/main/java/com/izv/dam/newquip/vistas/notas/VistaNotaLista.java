@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -56,7 +57,6 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 nota.setTitulo(editable.toString());
             }
         });
-
         nota.setTipo(Nota.NOTA_LISTA);
         if (savedInstanceState != null) {
             nota = savedInstanceState.getParcelable("nota");
@@ -69,7 +69,7 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 nota.setFecha(new Date(System.currentTimeMillis()));
             }
         }
-        System.out.println("Received nota: \n\t" + nota);
+        Log.v("VistaNotaLista", "Received nota: \n\t" + nota);
         rvTareas = (RecyclerView) findViewById(R.id.rvTareas);
         rvTareas.setLayoutManager(new LinearLayoutManager(this));
         adaptador = new AdaptadorTarea(nota.getTareas());
@@ -85,7 +85,8 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 int swipedPosition = viewHolder.getAdapterPosition();
                 presentador.onRemoveTarea(nota.getTareas().get(swipedPosition).getId());
                 nota.getTareas().remove(swipedPosition);
-                adaptador.notifyItemRemoved(swipedPosition);
+                //adaptador.notifyItemRemoved(swipedPosition);
+                adaptador.notifyDataSetChanged();
             }
         };
 
@@ -99,8 +100,10 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 Tarea t = new Tarea();
                 t.setId(presentador.onAddTarea(t));
                 t.setIdNota(nota.getId());
-                nota.getTareas().add(t);
-                adaptador.notifyItemRemoved(adaptador.getItemCount());
+                nota.getTareas().add(0, t);
+                //adaptador.notifyItemInserted(0);
+                adaptador.notifyDataSetChanged();
+                rvTareas.scrollToPosition(0);
             }
         });
 

@@ -38,7 +38,7 @@ public class ContratoBaseDatos {
         public static final String TAREA = "tarea"; // Tareas que hay en la nota lista
         public static final String REALIZADA = "realizada"; // Boolean checkbox
         public static final String[] PROJECTION_ALL = {_ID, ID_NOTA, TAREA, REALIZADA};
-        public static final String SORT_ORDER_DEFAULT = _ID + " desc";
+        public static final String SORT_ORDER_DEFAULT = _ID + " asc";
 
         public static final String URI_TAREA ="content://"+AUTHORITY+"/"+ContratoBaseDatos.TablaTareas.TABLA;
         public static final Uri CONTENT_URI_TAREA = Uri.parse(URI_TAREA);

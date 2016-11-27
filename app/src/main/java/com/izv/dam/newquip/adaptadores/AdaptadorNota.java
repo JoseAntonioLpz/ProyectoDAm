@@ -153,7 +153,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
         return 0;
     }
 
-    public void changeCursor(Cursor cursor) {
+    public void changeCursorNotas(Cursor cursor) {
         if (cursor != null) {
             this.cursor = cursor;
             try {
@@ -164,7 +164,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
         }
     }
 
-    public void setCursorTareas(Cursor cursorTareas) {
+    public void changeCursorTareas(Cursor cursorTareas) {
         this.cursorTareas = cursorTareas;
     }
 

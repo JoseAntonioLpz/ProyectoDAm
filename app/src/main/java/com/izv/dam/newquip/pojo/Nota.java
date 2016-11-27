@@ -44,7 +44,7 @@ public class Nota  implements Parcelable{
     }
 
     public Nota() {
-        this(0, 0, null, null, false, null/*, null*/);
+        this(0, 0, null, null, false, new Date()/*, null*/);
     }
 
 
@@ -229,7 +229,7 @@ public class Nota  implements Parcelable{
     @Override
     public String toString() {
         String ts = "";
-        if(!tareas.isEmpty()) {
+        if(tareas != null && !tareas.isEmpty()) {
             for (Tarea t : this.tareas) {
                 ts += t.toString() + ", ";
             }

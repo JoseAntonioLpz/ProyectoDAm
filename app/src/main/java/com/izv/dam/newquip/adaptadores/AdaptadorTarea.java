@@ -67,19 +67,25 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+                if (position <= list.size() - 1) {
+                    list.get(position).setTarea(charSequence.toString());
+                }
             }
 
             @Override
             public void afterTextChanged(Editable editable) {
-                list.get(position).setTarea(editable.toString());
+
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        if(list != null) {
+            return list.size();
+        }else{
+            return 0;
+        }
     }
 
 }
