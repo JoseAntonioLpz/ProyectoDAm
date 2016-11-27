@@ -73,18 +73,6 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
         rvTareas = (RecyclerView) findViewById(R.id.rvTareas);
         rvTareas.setLayoutManager(new LinearLayoutManager(this));
         adaptador = new AdaptadorTarea(nota.getTareas());
-        /*adaptador.setOnCheckBoxClickListener(new AdaptadorTarea.OnCheckBoxClickListener() {
-            @Override
-            public void onCheckBoxClick(int i, boolean value) {
-                nota.getTareas().get(i).setRealizado(value);
-            }
-        });
-        adaptador.setOnCaretUpdateListener(new AdaptadorTarea.OnCaretUpdateListener() {
-            @Override
-            public void onCaretUpdate(int i, String text) {
-                nota.getTareas().get(i).setTarea(text);
-            }
-        });*/
         rvTareas.setAdapter(adaptador);
         ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
@@ -97,7 +85,6 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 int swipedPosition = viewHolder.getAdapterPosition();
                 presentador.onRemoveTarea(nota.getTareas().get(swipedPosition).getId());
                 nota.getTareas().remove(swipedPosition);
-                //adaptador.changeList(nota.getTareas());
                 adaptador.notifyItemRemoved(swipedPosition);
             }
         };
@@ -113,7 +100,6 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 t.setId(presentador.onAddTarea(t));
                 t.setIdNota(nota.getId());
                 nota.getTareas().add(t);
-                //adaptador.changeList(nota.getTareas());
                 adaptador.notifyItemRemoved(adaptador.getItemCount());
             }
         });

@@ -82,10 +82,4 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
         return list.size();
     }
 
-    public void changeList(List<Tarea> list) {
-        if (list != null) {
-            this.list = list;
-            notifyDataSetChanged();
-        }
-    }
 }

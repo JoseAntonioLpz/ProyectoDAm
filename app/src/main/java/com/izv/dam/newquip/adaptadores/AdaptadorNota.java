@@ -66,22 +66,6 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             ivAudio = (ImageView) itemView.findViewById(R.id.ivAudio);
         }
-
-        public void bind(final int i, final OnItemClickListener listener, final OnCheckBoxClickListener checkBoxClickListener){
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    listener.onItemClick(i);
-                }
-            });
-
-            cbRealizado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    checkBoxClickListener.onCheckBoxClick(i, b);
-                }
-            });
-        }
     }
 
     @Override
@@ -104,11 +88,17 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
     public void onBindViewHolder(ViewHolderNota holder, final int position) {
         cursor.moveToPosition(position);
         final Nota nota = Nota.getNota(cursor);
-        holder.cbRealizado.setChecked(nota.isRealizado());
-        holder.cbRealizado.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nota.setRealizado(!nota.isRealizado());
+                clickListener.onItemClick(position);
+            }
+        });
+        holder.cbRealizado.setChecked(nota.isRealizado());
+        holder.cbRealizado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                checkBoxListener.onCheckBoxClick(position, b);
             }
         });
         String txtNota;
@@ -153,7 +143,6 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
                 holder.tvNota.setText("No hay tareas...");
             }
         }
-        holder.bind(position, clickListener, checkBoxListener);
     }
 
     @Override
