@@ -3,6 +3,7 @@ package com.izv.dam.newquip.adaptadores;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,8 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
 
     public interface OnCaretUpdateListener {
         void onCaretUpdate(int i, String text);
+
+
     }
 
     public void setOnCaretUpdateListener(OnCaretUpdateListener listener){
@@ -107,6 +110,7 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
         if (list != null) {
             this.list = list;
             notifyDataSetChanged();
+            Log.v("AdaptadorTarea", "changeList");
         }
     }
 }

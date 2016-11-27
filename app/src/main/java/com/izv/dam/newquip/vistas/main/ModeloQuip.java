@@ -13,6 +13,7 @@ import com.izv.dam.newquip.pojo.Nota;
 
 public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
+    //TODO los cursores fallan cuando se filtra, lleva el control de los 2
     private ContentResolver cr;
     private Cursor cursor;
 
@@ -93,17 +94,19 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     public Cursor changeCursor(int tipo){
         Log.v("ModeloQuip", "changeCursor");
         Uri uri = ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA;
+        Cursor c = cr.query(uri,null,null,null,null);
         if(tipo == Nota.NOTA_SIMPLE){
-            return cr.query(uri,null, ContratoBaseDatos.TablaNota.TIPO + " = " + Nota.NOTA_SIMPLE, null ,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
+            c = cr.query(uri,null, ContratoBaseDatos.TablaNota.TIPO + " = " + Nota.NOTA_SIMPLE, null ,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
         }else if(tipo == Nota.NOTA_LISTA){
-            return cr.query(uri,null, ContratoBaseDatos.TablaNota.TIPO + " = " + Nota.NOTA_LISTA, null ,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
+            c =  cr.query(uri,null, ContratoBaseDatos.TablaNota.TIPO + " = " + Nota.NOTA_LISTA, null ,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
         }else if(tipo == 3){
-            return cr.query(uri,null,ContratoBaseDatos.TablaNota.REALIZADO + " = " + 1,null,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
+            c = cr.query(uri,null,ContratoBaseDatos.TablaNota.REALIZADO + " = " + 1,null,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
         }else if(tipo == 4){
-            return cr.query(uri,null,ContratoBaseDatos.TablaNota.REALIZADO + " = " + 0,null,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
+            c = cr.query(uri,null,ContratoBaseDatos.TablaNota.REALIZADO + " = " + 0,null,ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT);
         }else if(tipo == -1){
-            return cr.query(uri,null,null,null,null);
+            c = cr.query(uri,null,null,null,null);
         }
-        return cr.query(uri,null,null,null,null);
+        cursor = c;
+        return c;
     }
 }

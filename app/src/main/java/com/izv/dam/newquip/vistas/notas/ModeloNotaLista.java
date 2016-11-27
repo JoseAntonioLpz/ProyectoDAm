@@ -3,9 +3,7 @@ package com.izv.dam.newquip.vistas.notas;
 import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.Context;
-import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
 import com.izv.dam.newquip.contrato.ContratoNotaLista;
@@ -25,51 +23,17 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     }
 
     @Override
-    public void close() {
-    }
-
-    @Override
-    public Nota getNota(long id) {
-        Log.v("ModeloNotaLista", "getNota id: " + id);
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, id);
-        Cursor c = cr.query(
-                uri,
-                ContratoBaseDatos.TablaNota.PROJECTION_ALL,
-                "",
-                new String[]{},
-                ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT
-        );
-        Nota n = Nota.getNota(c);
-        String where = ContratoBaseDatos.TablaTareas.ID_NOTA + " =? ";
-        String[] argumentos = new String[]{String.valueOf(n.getId())};
-        c = cr.query(
-                ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
-                ContratoBaseDatos.TablaTareas.PROJECTION_ALL,
-                where,
-                argumentos,
-                ContratoBaseDatos.TablaTareas.SORT_ORDER_DEFAULT
-        );
-        Log.v("ModeloNotaLista", "getNota tareas: " + c.getCount());
-        n.setTareas(c);
-        return n;
-    }
-
-
-    @Override
-    public long saveNota(Nota n) {
-        Log.v("ModeloNotaLista", "saveNota id: " + n.getId());
-        long r = 0;
-        if(n.getId() == 0) {
-            r = this.insertNota(n);
-        } else {
-            this.updateNota(n);
+    public void saveNota(Nota n) {
+        if(n.getId() == 0){
+            insertNota(n);
+        }else{
+            updateNota(n);
         }
-        return r;
     }
 
     @Override
-    public void removeTarea(Tarea t) {
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
+    public void removeTarea(long id) {
+        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, id);
         cr.delete(
                 uri,
                 "",
@@ -77,87 +41,54 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
         );
     }
 
-    private long deleteNota(Nota n) {
-        Log.v("ModeloNotaLista", "deleteNota id: " + n.getId());
-        for (Tarea t: n.getTareas()){
-            Uri u = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
-            cr.delete(
-                    u,
-                    "",
-                    new String[]{}
-            );
-        }
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
-        return cr.delete(
-                uri,
-                "",
-                new String[]{}
-        );
-
-    }
-
-    private long insertNota(Nota n) {
-        Log.v("ModeloNotaLista", "insertNota id: " + n.getId());
-        if(n.getTitulo().trim().compareTo("") == 0) {
-            this.deleteNota(n);
-            for (Tarea t : n.getTareas()) {
-                Uri u = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
-                cr.delete(
-                        u,
-                        "",
-                        new String[]{}
-                );
-            }
-            return 0;
-        }
-        for (Tarea t: n.getTareas()){
-            t.setId(ContentUris.parseId(cr.insert(
-                    ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
-                    t.getContentValues()
-            )));
-        }
-        return ContentUris.parseId(cr.insert(
+    private long insertNota(Nota n){
+        long id = ContentUris.parseId(
+            cr.insert(
                 ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                 n.getContentValues(false)
-        ));
+            )
+        );
+
+        for (Tarea t : n.getTareas()) {
+            t.setIdNota(id);
+            t.setId(insertTarea(t));
+        }
+        return id;
     }
 
-    private long updateNota(Nota n) {
-        Log.v("ModeloNotaLista", "updateNota id: " + n.getId());
+    private void updateNota(Nota n){
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
-        if(n.getTitulo().trim().compareTo("") == 0) {
-            this.deleteNota(n);
-            for (Tarea t : n.getTareas()) {
-                Uri u = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
-                cr.delete(
-                        u,
-                        "",
-                        new String[]{}
-                );
-            }
-            return 0;
-        }
-        for (Tarea t : n.getTareas()){
+        cr.update(
+            uri,
+            n.getContentValues(true),
+            "",
+            new String[]{}
+        );
+        for (Tarea t : n.getTareas()) {
             if(t.getId() == 0){
-                t.setId(ContentUris.parseId(cr.insert(
-                        ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
-                        t.getContentValues()
-                )));
+                t.setId(insertTarea(t));
             }else{
-                Uri u = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
-                cr.update(
-                        u,
-                        t.getContentValues(),
-                        "",
-                        new String[]{}
-                );
+                updateTarea(t);
             }
         }
-        return cr.update(
-                uri,
-                n.getContentValues(true),
-                "",
-                new String[]{}
+    }
+
+    private long insertTarea(Tarea t){
+        return ContentUris.parseId(
+            cr.insert(
+                ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
+                t.getContentValues(false)
+            )
+        );
+    }
+
+    private void updateTarea(Tarea t){
+        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
+        cr.update(
+            uri,
+            t.getContentValues(true),
+            "",
+            new String[]{}
         );
     }
 }

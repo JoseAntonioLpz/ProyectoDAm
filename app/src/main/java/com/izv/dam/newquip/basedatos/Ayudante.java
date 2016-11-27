@@ -56,13 +56,13 @@ public class Ayudante extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String delete1="drop table if exists " + ContratoBaseDatos.TablaNota.TABLA;
+        /*String delete1="drop table if exists " + ContratoBaseDatos.TablaNota.TABLA;
         String delete2="drop table if exists " + ContratoBaseDatos.TablaTareas.TABLA;
         db.execSQL(delete1);
         db.execSQL(delete2);
-        onCreate(db);
+        onCreate(db);*/
         //Se crea la tabla temporal de Nota
-        /*StringBuilder tablaTemporalNota = new StringBuilder();
+        StringBuilder tablaTemporalNota = new StringBuilder();
         tablaTemporalNota.append("create table if not exists ").append(ContratoBaseDatos.TablaNota.TABLA + "tmp").append("(");
         tablaTemporalNota.append(ContratoBaseDatos.TablaNota._ID).append(" integer primary key autoincrement, ");
         tablaTemporalNota.append(ContratoBaseDatos.TablaNota.TIPO).append(" integer, ");
@@ -71,7 +71,7 @@ public class Ayudante extends SQLiteOpenHelper {
         tablaTemporalNota.append(ContratoBaseDatos.TablaNota.REALIZADO).append(" integer, ");
         tablaTemporalNota.append(ContratoBaseDatos.TablaNota.IMAGEN).append(" text, ");
         tablaTemporalNota.append(ContratoBaseDatos.TablaNota.FECHA).append(" text, ");
-        tablaTemporalNota.append(ContratoBaseDatos.TablaNota.RECORDATORIO).append(" text, ");
+        //tablaTemporalNota.append(ContratoBaseDatos.TablaNota.RECORDATORIO).append(" text, ");
         tablaTemporalNota.append(ContratoBaseDatos.TablaNota.AUDIO).append(" text");
 
 
@@ -111,6 +111,6 @@ public class Ayudante extends SQLiteOpenHelper {
         String delete3="drop table if exists " + ContratoBaseDatos.TablaNota.TABLA + "tmp";
         String delete4="drop table if exists " + ContratoBaseDatos.TablaTareas.TABLA + "tmp";
         db.execSQL(delete3);
-        db.execSQL(delete4);*/
+        db.execSQL(delete4);
     }
 }

@@ -2,6 +2,7 @@ package com.izv.dam.newquip.adaptadores;
 
 import android.database.Cursor;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,7 +167,11 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
     public void changeCursor(Cursor cursor) {
         if (cursor != null) {
             this.cursor = cursor;
-            notifyDataSetChanged();
+            try {
+                notifyDataSetChanged();
+            } catch (Exception e) {
+                Log.v("AdaptadorNota", e.toString());
+            }
         }
     }
 

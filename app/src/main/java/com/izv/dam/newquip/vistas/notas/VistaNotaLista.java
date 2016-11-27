@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 
@@ -26,10 +28,10 @@ import java.util.List;
 public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLista.InterfaceVista {
 
     private PresentadorNotaLista presentador;
-    private Nota nota = new Nota();
     private EditText etTitulo;
     private RecyclerView rvTareas;
     private AdaptadorTarea adaptador;
+    private Nota nota = new Nota();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -38,10 +40,26 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
 
         presentador = new PresentadorNotaLista(this);
         etTitulo = (EditText) findViewById(R.id.etTitulo);
+        etTitulo.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                nota.setTitulo(editable.toString());
+            }
+        });
+
+        nota.setTipo(Nota.NOTA_LISTA);
         if (savedInstanceState != null) {
             nota = savedInstanceState.getParcelable("nota");
-            nota.setTareas((List) savedInstanceState.getParcelableArrayList("tareas"));
         } else {
             Bundle b = getIntent().getExtras();
             if(b != null ) {
@@ -77,8 +95,8 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
             @Override
             public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
                 int swipedPosition = viewHolder.getAdapterPosition();
-                presentador.onRemoveTarea(nota.getTareas().get(swipedPosition));
-                nota.removeTarea(swipedPosition);
+                presentador.onRemoveTarea(nota.getTareas().get(swipedPosition).getId());
+                nota.getTareas().remove(swipedPosition);
                 adaptador.changeList(nota.getTareas());
             }
         };
@@ -86,34 +104,32 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
         itemTouchHelper.attachToRecyclerView(rvTareas);
 
-        mostrarNota(nota);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.btnFlotNotList);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 nota.addTarea(new Tarea());
-                presentador.onAddTarea(nota);
+                adaptador.changeList(nota.getTareas());
             }
         });
+
     }
 
     @Override
-    public void mostrarNota(Nota n) {
+    public void showNota(Nota n) {
         etTitulo.setText(n.getTitulo());
         adaptador.changeList(n.getTareas());
     }
 
     @Override
     protected void onPause() {
-        saveNota();
-        presentador.onPause();
+        presentador.onPause(nota);
         super.onPause();
     }
 
     @Override
     protected void onResume() {
-        presentador.onResume();
+        presentador.onResume(nota);
         super.onResume();
     }
 
@@ -121,18 +137,5 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable("nota", nota);
-    }
-
-    private void saveNota() {
-        nota.setTitulo(etTitulo.getText().toString());
-        nota.setTipo(Nota.NOTA_LISTA);
-        long r = presentador.onSaveNota(nota);
-        if(r > 0 & nota.getId() == 0){
-            nota.setId(r);
-        }
-        for (Tarea t :
-                nota.getTareas()) {
-            System.out.println(t);
-        }
     }
 }

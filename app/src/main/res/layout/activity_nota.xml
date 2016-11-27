@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btPlay"
-            android:visibility="visible"
+            android:visibility="gone"
             android:background="@android:drawable/ic_lock_silent_mode_off"
             android:text="Play" />
 
@@ -175,10 +175,10 @@
                 android:id="@+id/ivDetenerAudio"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/btSave"
-                android:layout_weight="0.30"
-                android:layout_height="30dp"
+                android:layout_weight="163.80"
+                android:layout_height="300dp"
                 android:paddingRight="10dp"
-                android:visibility="visible" />
+                android:visibility="gone" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
