@@ -23,11 +23,22 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     }
 
     @Override
-    public void saveNota(Nota n) {
+    public long saveNota(Nota n) {
         if(n.getId() == 0){
-            insertNota(n);
+            return insertNota(n);
         }else{
             updateNota(n);
+            return n.getId();
+        }
+    }
+
+    @Override
+    public long saveTarea(Tarea t) {
+        if(t.getId() == 0){
+            return insertTarea(t);
+        }else{
+            updateTarea(t);
+            return t.getId();
         }
     }
 

@@ -13,7 +13,6 @@ import com.izv.dam.newquip.pojo.Nota;
 
 public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
-    //TODO los cursores fallan cuando se filtra, lleva el control de los 2
     private ContentResolver cr;
     private Cursor cursor;
 

@@ -3,7 +3,6 @@ package com.izv.dam.newquip.adaptadores;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,26 +21,7 @@ import java.util.List;
 
 public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHolderTarea>{
     private List<Tarea> list;
-    private OnCaretUpdateListener caretListener;
-    private OnCheckBoxClickListener checkBoxListener;
 
-    public interface OnCaretUpdateListener {
-        void onCaretUpdate(int i, String text);
-
-
-    }
-
-    public void setOnCaretUpdateListener(OnCaretUpdateListener listener){
-        this.caretListener = listener;
-    }
-
-    public interface OnCheckBoxClickListener {
-        void onCheckBoxClick(int i, boolean value);
-    }
-
-    public void setOnCheckBoxClickListener(OnCheckBoxClickListener listener){
-        this.checkBoxListener = listener;
-    }
 
     public static class ViewHolderTarea extends RecyclerView.ViewHolder {
         public CheckBox cbRealizado;
@@ -52,37 +32,11 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
             cbRealizado = (CheckBox) itemView.findViewById(R.id.cbRealizado);
             etTarea = (EditText) itemView.findViewById(R.id.etTarea);
         }
-
-        public void bind(final int i, final OnCheckBoxClickListener checkBoxClickListener,final OnCaretUpdateListener caretListener){
-            cbRealizado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    checkBoxClickListener.onCheckBoxClick(i, b);
-                }
-            });
-            etTarea.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                    caretListener.onCaretUpdate(i, etTarea.getText().toString());
-                }
-            });
-        }
     }
 
     public AdaptadorTarea(List<Tarea> list){
         this.list = list;
     }
-
 
     @Override
     public ViewHolderTarea onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -91,18 +45,40 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolderTarea holder, int position) {
+    public void onBindViewHolder(final ViewHolderTarea holder, final int position) {
         Tarea tarea = list.get(position);
         holder.cbRealizado.setChecked(tarea.isRealizado());
-        holder.etTarea.setText(tarea.getTarea());
-        holder.bind(position, checkBoxListener, caretListener);
+        holder.cbRealizado.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                list.get(position).setRealizado(b);
+            }
+        });
+        if (tarea.getTarea().equals("")) {
+            holder.etTarea.setText("Nueva tarea");
+        } else {
+            holder.etTarea.setText(tarea.getTarea());
+        }
+        holder.etTarea.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                list.get(position).setTarea(editable.toString());
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        if(list.isEmpty()){
-            return 0;
-        }
         return list.size();
     }
 
@@ -110,7 +86,6 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
         if (list != null) {
             this.list = list;
             notifyDataSetChanged();
-            Log.v("AdaptadorTarea", "changeList");
         }
     }
 }
