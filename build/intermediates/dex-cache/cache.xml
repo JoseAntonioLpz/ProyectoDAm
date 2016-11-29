@@ -61,7 +61,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="0833d5b1f57e4fad52354282c23e72c739ab9b0f">
+        sha1="3880d9a052b9ca23a550c661fa0f5575d72399f6">
         <dex dex="C:\Users\josea\Documents\GitHub\ProyectoDAm\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_c9f5cc6df3d8edf7bc6af8e8acc4ec672b078b89\classes.dex" />
     </item>
     <item
@@ -133,7 +133,7 @@
         jumboMode="true"
         optimize="true"
         revision="24.0.2"
-        sha1="e81bb5c3ac3eaeb2ccb51e210c72dad92fff883e">
+        sha1="77d60a776c94c53bfbd8d074b1c976bc34b20e2f">
         <dex dex="C:\Users\josea\Documents\GitHub\ProyectoDAm\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_d2079ac6e683db1ec8984fe25b13ef97ded94893\classes.dex" />
     </item>
     <item
