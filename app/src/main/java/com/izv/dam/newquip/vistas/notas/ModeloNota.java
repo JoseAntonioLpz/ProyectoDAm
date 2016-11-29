@@ -61,7 +61,7 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
 
     private long insertNota(Nota n) {
         Log.v("ModeloNota", "insertNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
-        if(n.getNota().trim().compareTo("")==0 && n.getTitulo().trim().compareTo("")==0) {
+        if((n.getNota() == null || n.getNota().trim().compareTo("")==0) && (n.getTitulo() == null || n.getTitulo().trim().compareTo("")==0)) {
             this.deleteNota(n);
             return 0;
         }
@@ -74,7 +74,7 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
     private int updateNota(Nota n) {
         Log.v("ModeloNota", "updateNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
-        if(n.getNota().trim().compareTo("")==0 && n.getTitulo().trim().compareTo("")==0) {
+        if((n.getNota() == null || n.getNota().trim().compareTo("")==0) && (n.getTitulo() == null || n.getTitulo().trim().compareTo("")==0)) {
             this.deleteNota(n);
             return 0;
         }

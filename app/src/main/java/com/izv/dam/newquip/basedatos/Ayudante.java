@@ -14,7 +14,7 @@ public class Ayudante extends SQLiteOpenHelper {
     //fechas https://www.sqlite.org/lang_datefunc.html
     //trigger https://www.sqlite.org/lang_createtrigger.html
 
-    private static final int VERSION = 4;
+    private static final int VERSION =10;
 
     public Ayudante(Context context) {
         super(context, ContratoBaseDatos.BASEDATOS, null, VERSION);

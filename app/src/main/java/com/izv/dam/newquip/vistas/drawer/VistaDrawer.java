@@ -1,6 +1,7 @@
 package com.izv.dam.newquip.vistas.drawer;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -46,7 +47,7 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
     float pgrande;
     float pdefecto;
     int GUARDAR_DIBUJO = 200;
-    Nota nota;
+    //Nota nota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +78,7 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
 
         pdefecto = pmediano;
 
-        if (savedInstanceState != null) {
+        /*if (savedInstanceState != null) {
             nota = savedInstanceState.getParcelable("nota");
             String color = savedInstanceState.getString("color");
             float grosor = savedInstanceState.getFloat("grosor");
@@ -91,7 +92,7 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
             else {
                 nota= new Nota();
             }
-        }
+        }*/
 
     }
 
@@ -175,12 +176,13 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
                             }
                             MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
                             Toast.makeText(getApplicationContext(),"¡Dibujo salvado en la galeria!", Toast.LENGTH_SHORT).show();
-                            nota.setRutaImagen(file.getAbsolutePath());
+                            /*nota.setRutaImagen(file.getAbsolutePath());
                             Intent i = new Intent(VistaDrawer.this, VistaNota.class);
                             Bundle b = new Bundle();
-                            b.putParcelable("nota", nota);
+                            b.putParcelable("nota",nota);
                             i.putExtras(b);
-                            startActivity(i);
+                            startActivityForResult(i,400);*/
+                            cierraYguarda(file.getAbsolutePath());
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -247,13 +249,13 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
         }
     }
 
-    @Override
+    /*@Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable("nota", nota);
         outState.putFloat("grosor",lienzo.getTamanyoPunto());
         outState.putString("color",lienzo.getColor());
-    }
+    }*/
 
     private void solicitarPermisoHacerLlamada() {
         //Pedimos el permiso o los permisos con un cuadro de dialogo del sistema
@@ -284,5 +286,11 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
                 Toast.makeText(this, "3.2 Permiso No Concedido", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+    private void cierraYguarda(String ruta){
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("rutaDibujo", ruta);
+        setResult(Activity.RESULT_OK,returnIntent);
+        finish();
     }
 }

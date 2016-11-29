@@ -2,11 +2,13 @@ package com.izv.dam.newquip.vistas.notas;
 
 import android.content.Context;
 import android.content.Intent;
+import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -21,6 +23,7 @@ import com.izv.dam.newquip.R;
 import com.izv.dam.newquip.audio.Audio;
 import com.izv.dam.newquip.camara.Camara;
 import com.izv.dam.newquip.contrato.ContratoNota;
+import com.izv.dam.newquip.databinding.ActivityNotaBinding;
 import com.izv.dam.newquip.pdf.Pdf;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.vistas.drawer.VistaDrawer;
@@ -55,11 +58,13 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
     private Camara c = new Camara(yo);
     private final int ACTIVIDAD_FOTO = 200;
     private final int ACTIVIDAD_GALERIA = 300;
+    private final int ACTIVIDAD_DRAWER = 400;
+    private final int ACTIVIDAD_CALENDARIO = 111;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nota);
+        ActivityNotaBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_nota);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -70,7 +75,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         imagen = (ImageView)findViewById(R.id.imagenCargada);
         btPlay = (Button) findViewById(R.id.btPlay);
         btRecordatorio = (ImageView)findViewById(R.id.btRecordatorio);
-        tvRecordatorio = (TextView)findViewById(R.id.tvRecordatorio);
+        tvRecordatorio = (TextView)findViewById(R.id.recordatorio);
 
         if (savedInstanceState != null) {
             nota = savedInstanceState.getParcelable("nota");
@@ -83,6 +88,8 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
             }
         }
         System.out.println("Received nota: \n\t" + nota);
+        binding.setNota(nota);
+        System.out.println("Nota 1" + nota.toString());
         mostrarNota(nota);
 
         addFoto = (ImageView) findViewById(R.id.ivAddFoto);
@@ -105,18 +112,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 startActivityForResult(intent.createChooser(intent, "Selecciona app de imagenes"), ACTIVIDAD_GALERIA);
             }
         });
-
-        //PARA GUARDAR MIENTRAS ARREGLAMOS EL PROBLEMA DE LA GALERIA Y LAS FOTOS (DUPLICACION DE NOTAS)
-        ImageView bt = (ImageView) findViewById(R.id.btSave);
-        bt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(VistaNota.this, "Nota guardada", Toast.LENGTH_SHORT).show();
-                saveNota();
-                Intent i = new Intent(VistaNota.this, VistaQuip.class);
-                startActivity(i);
-            }
-        });
         final Audio a = new Audio (yo,context);
         addAudio.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,6 +128,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 nota.setRutaAudio(archivoAudio.getAbsolutePath());
                 btPlay.setVisibility(View.VISIBLE);
                 dtAudio.setVisibility(View.GONE);
+                Toast.makeText(VistaNota.this, "Audio guardado", Toast.LENGTH_SHORT).show();
             }
         });
         btPlay.setOnClickListener(new View.OnClickListener() {
@@ -141,16 +137,16 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 a.reproducir(nota.getRutaAudio());
             }
         });
-        //DIBUJO EN PRUEBAS
+        //DIBUJO
         addDibujo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, VistaDrawer.class);
-                Bundle b = new Bundle();
-                guardarDatosNota();
-                b.putParcelable("nota", nota);
-                intent.putExtras(b);
-                startActivity(intent);
+                //Bundle b = new Bundle();
+                //guardarDatosNota();
+                /*b.putParcelable("nota", nota);
+                intent.putExtras(b);*/
+                startActivityForResult(intent,ACTIVIDAD_DRAWER);
             }
         });
         //PDF
@@ -170,7 +166,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 Bundle b = new Bundle();
                 b.putParcelable("nota",nota);
                 intent.putExtras(b);
-                startActivity(intent);
+                startActivityForResult(intent,ACTIVIDAD_CALENDARIO);
             }
         });
     }
@@ -244,6 +240,21 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                         e.printStackTrace();
                     }
                     break;
+                case ACTIVIDAD_DRAWER:
+                    String rutaDibujo = data.getExtras().getString("rutaDibujo");
+                    nota.setRutaImagen(rutaDibujo);
+                    imagen.setVisibility(View.VISIBLE);
+                    imagen.setImageURI(Uri.fromFile(new File(nota.getRutaImagen())));
+                    break;
+                case ACTIVIDAD_CALENDARIO:
+                    Toast.makeText(this, "Hay recordatorio" , Toast.LENGTH_SHORT).show();
+                    String recordatorio = data.getExtras().getString("fechaModificada");
+                    nota.setRecordatorio(recordatorio);
+                    if (nota.getRecordatorio() !=null){
+                        tvRecordatorio.setText("Recordatorio: " + nota.getRecordatorio().toString());
+                    }
+                    saveNota();
+                    break;
             }
         }
     }
@@ -252,6 +263,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
     protected void onPause() {
         Log.v("VistaNota", "onPause()");
         saveNota();
+        System.out.println("Nota 2 " + nota.toString());
         presentador.onPause();
         super.onPause();
     }
@@ -272,8 +284,8 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
 
     @Override
     public void mostrarNota(Nota n) {
-        editTextTitulo.setText(nota.getTitulo());
-        editTextNota.setText(nota.getNota());
+        //editTextTitulo.setText(nota.getTitulo());
+        //editTextNota.setText(nota.getNota());
         if(nota.getRutaImagen() != null && !nota.getRutaImagen().equals("")){
             imagen.setVisibility(View.VISIBLE);
             imagen.setImageURI(Uri.fromFile(new File(nota.getRutaImagen())));
@@ -287,16 +299,16 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         /*if(nota.getRecordatorio() != null && !nota.getRecordatorio().toString().substring(30).equals(d.toString().toString().substring(30))) {
             Log.v("recordatorio", nota.getRecordatorio().toString());
             tvRecordatorio.setText(nota.getRecordatorio().toString());
-        }*/
+       }*/
     }
 
     private void saveNota() {
         Log.v("VistaNota", "saveNota()");
-        nota.setTitulo(editTextTitulo.getText().toString());
-        nota.setNota(editTextNota.getText().toString());
+        //nota.setTitulo(editTextTitulo.getText().toString());
+        //nota.setNota(editTextNota.getText().toString());
         nota.setTipo(Nota.NOTA_SIMPLE);
         nota.setFecha(new Date());
-        //  nota.setRecordatorio(new Date());
+        nota.setRecordatorio(tvRecordatorio.getText().toString().replace("Recordatorio: ",""));
         if(nota.getRutaAudio().length() != 0){
             nota.setRutaAudio(nota.getRutaAudio());
         }else if(archivoAudio == null || (archivoAudio.getAbsolutePath()== null && archivoAudio.getAbsolutePath().length() == 0)) {
@@ -309,8 +321,8 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         Log.v("VistaNota", "Id nota guardada: " + nota.getId());
     }
 
-    private void guardarDatosNota() {
+    /*private void guardarDatosNota() {
         nota.setTitulo(editTextTitulo.getText().toString());
         nota.setNota(editTextNota.getText().toString());
-    }
+    }*/
 }

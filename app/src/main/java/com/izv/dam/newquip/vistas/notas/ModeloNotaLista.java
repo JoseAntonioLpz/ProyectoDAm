@@ -57,10 +57,10 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     private long insertNota(Nota n){
         long id = ContentUris.parseId(
-            cr.insert(
-                ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
-                n.getContentValues(false)
-            )
+                cr.insert(
+                        ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                        n.getContentValues(false)
+                )
         );
         if(n.getTareas() != null) {
             for (Tarea t : n.getTareas()) {
@@ -74,10 +74,10 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     private void updateNota(Nota n){
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
         cr.update(
-            uri,
-            n.getContentValues(true),
-            "",
-            new String[]{}
+                uri,
+                n.getContentValues(true),
+                "",
+                new String[]{}
         );
         for (Tarea t : n.getTareas()) {
             if(t.getId() == 0){
@@ -90,20 +90,20 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     private long insertTarea(Tarea t){
         return ContentUris.parseId(
-            cr.insert(
-                ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
-                t.getContentValues(false)
-            )
+                cr.insert(
+                        ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
+                        t.getContentValues(false)
+                )
         );
     }
 
     private void updateTarea(Tarea t){
         Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
         cr.update(
-            uri,
-            t.getContentValues(true),
-            "",
-            new String[]{}
+                uri,
+                t.getContentValues(true),
+                "",
+                new String[]{}
         );
     }
 }
