@@ -41,6 +41,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     public void updateNota(int position, boolean value) {
         cursorNotas.moveToPosition(position);
         Nota n = Nota.getNota(cursorNotas);
+        System.out.println("UPDATENOTAS" + n.getRecordatorio());
         n.setRealizado(value);
         updateNota(n);
         this.loadCursorNotas(tipo);

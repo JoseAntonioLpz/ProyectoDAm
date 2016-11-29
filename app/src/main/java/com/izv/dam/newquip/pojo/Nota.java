@@ -51,9 +51,9 @@ public class Nota  implements Parcelable{
         tipo = in.readInt();
         titulo = in.readString();
         nota = in.readString();
-
         realizado = in.readByte() != 0;
         rutaImagen = in.readString();
+        rutaAudio = in.readString();
         tareas = new ArrayList<Tarea>();
         fecha = new Date(UtilFecha.dateToLong(in.readString()));
         recordatorio = in.readString();
