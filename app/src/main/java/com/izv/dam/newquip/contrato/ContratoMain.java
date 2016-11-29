@@ -55,6 +55,8 @@ public interface ContratoMain {
 
         void showNotas(Cursor cursorNotas, Cursor cursoTareas);
 
+        void showProgressBar(boolean show);
+
     }
 
 }

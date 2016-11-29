@@ -40,6 +40,6 @@ public class PresentadorNotaLista implements ContratoNotaLista.InterfacePresenta
 
     @Override
     public void onRemoveTarea(long id) {
-        this.modelo.removeTarea(id);
+        this.modelo.deleteTarea(id);
     }
 }

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.izv.dam.newquip.R;
@@ -33,6 +34,7 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
     private RecyclerView recycler;
     private AdaptadorNota adaptador;
     private PresentadorQuip presentador;
+    private ProgressBar pbLoading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,6 +108,8 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
     }
 
     @Override
@@ -190,5 +194,14 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
     public void showNotas(Cursor cursorNotas, Cursor cursoTareas) {
         adaptador.changeCursorTareas(cursoTareas);
         adaptador.changeCursorNotas(cursorNotas);
+    }
+
+    @Override
+    public void showProgressBar(boolean show) {
+        if(show){
+            pbLoading.setVisibility(View.VISIBLE);
+        }else{
+            pbLoading.setVisibility(View.GONE);
+        }
     }
 }

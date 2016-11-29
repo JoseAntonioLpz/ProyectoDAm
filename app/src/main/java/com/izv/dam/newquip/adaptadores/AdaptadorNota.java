@@ -51,7 +51,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
     public static class ViewHolderNota extends RecyclerView.ViewHolder{
 
         public CheckBox cbRealizado;
-        public TextView tvNota;
+        public TextView tvTareas;
         public ImageView ivImage;
         public ImageView ivAudio;
         public TextView tvFecha;
@@ -60,7 +60,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
         public ViewHolderNota(View itemView) {
             super(itemView);
             cbRealizado = (CheckBox) itemView.findViewById(R.id.cbRealizado);
-            tvNota = (TextView) itemView.findViewById(R.id.tvNota);
+            tvTareas = (TextView) itemView.findViewById(R.id.tvTareas);
             tvFecha = (TextView) itemView.findViewById(R.id.tvFecha);
             tvText = (TextView) itemView.findViewById(R.id.tvText);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
@@ -102,7 +102,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
             }
         });
         String txtNota;
-        if(!nota.getTitulo().equals("")){
+        if(nota.getTitulo() != null && !nota.getTitulo().equals("")){
             txtNota=nota.getTitulo();
             StringTokenizer str = new StringTokenizer(txtNota, "\n");
             txtNota = str.nextToken();
@@ -110,7 +110,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
                 txtNota = txtNota.substring(0, 18) + "...";
             }
             holder.tvText.setText(txtNota);
-        }else{
+        }else if(nota.getTitulo() != null && nota.getTitulo().equals("") && nota.getTipo() == Nota.NOTA_SIMPLE){
             txtNota=nota.getNota();
             StringTokenizer str = new StringTokenizer(txtNota, "\n");
             txtNota = str.nextToken();
@@ -138,9 +138,14 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
                     if (tarea.isRealizado())
                         elementosRealizados++;
                 }
-                holder.tvNota.setText("Tareas realizadas " + elementosRealizados + "/" + totalElementos);
+                if(nota.getTitulo() == null || nota.getTitulo().equals("")){
+                    holder.tvText.setText("Tareas realizadas " + elementosRealizados + "/" + totalElementos);
+                    holder.tvTareas.setText("");
+                }else{
+                    holder.tvTareas.setText("Tareas realizadas " + elementosRealizados + "/" + totalElementos);
+                }
             }else{
-                holder.tvNota.setText("No hay tareas...");
+                holder.tvTareas.setText("No hay tareas...");
             }
         }
     }

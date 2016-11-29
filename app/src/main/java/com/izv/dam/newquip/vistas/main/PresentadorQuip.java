@@ -1,6 +1,8 @@
 package com.izv.dam.newquip.vistas.main;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.os.AsyncTask;
 
 import com.izv.dam.newquip.contrato.ContratoMain;
 
@@ -16,14 +18,31 @@ public class PresentadorQuip implements ContratoMain.InterfacePresentador{
 
     @Override
     public void onResume() {
-        if(this.modelo.getCursorNotas() == null && this.modelo.getCursorTareas() == null) {
-            this.vista.showNotas(
-                    this.modelo.loadCursorNotas(0),
-                    this.modelo.loadCursorTareas()
-            );
-        } else {
-            this.vista.showNotas(this.modelo.getCursorNotas(), this.modelo.getCursorTareas());
-        }
+        new AsyncTask<Void, Integer, Cursor[]>() {
+            @Override
+            protected void onPreExecute() {
+                PresentadorQuip.this.vista.showProgressBar(true);
+            }
+
+            @Override
+            protected Cursor[] doInBackground(Void... voids) {
+                Cursor[] cs = new Cursor[2];
+                if(PresentadorQuip.this.modelo.getCursorNotas() == null || PresentadorQuip.this.modelo.getCursorTareas() == null){
+                    cs[0] = PresentadorQuip.this.modelo.loadCursorNotas(0);
+                    cs[1] = PresentadorQuip.this.modelo.loadCursorTareas();
+                }else{
+                    cs[0] = PresentadorQuip.this.modelo.getCursorNotas();
+                    cs[1] = PresentadorQuip.this.modelo.getCursorTareas();
+                }
+                return cs;
+            }
+
+            @Override
+            protected void onPostExecute(Cursor[] cs) {
+                PresentadorQuip.this.vista.showProgressBar(false);
+                PresentadorQuip.this.vista.showNotas(cs[0], cs[1]);
+            }
+        }.execute();
     }
 
     @Override

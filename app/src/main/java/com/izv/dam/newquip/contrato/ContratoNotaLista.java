@@ -10,7 +10,7 @@ public interface ContratoNotaLista {
 
         long saveTarea(Tarea t);
 
-        void removeTarea(long id);
+        void deleteTarea(long id);
     }
 
     interface InterfacePresentador {

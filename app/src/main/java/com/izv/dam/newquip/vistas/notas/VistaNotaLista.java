@@ -106,7 +106,6 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 rvTareas.scrollToPosition(0);
             }
         });
-
     }
 
     @Override

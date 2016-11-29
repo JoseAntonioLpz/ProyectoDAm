@@ -20,6 +20,15 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
     public ModeloQuip(Context c) {
         cr = c.getContentResolver();
+        /*for (int i = 0; i < 100; i++) {
+            Nota n = new Nota();
+            n.setTitulo("Nota " + i);
+            n.setFecha(new Date());
+            cr.insert(
+                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    n.getContentValues(false)
+            );
+        }*/
     }
 
     @Override
@@ -81,6 +90,9 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
     @Override
     public Cursor loadCursorNotas(int tipo) {
+        if(cursorNotas != null && !cursorNotas.isClosed()){
+            cursorNotas.close();
+        }
         this.tipo = tipo;
         if(tipo == 0){//Todas las notas
             cursorNotas = cr.query(
@@ -131,6 +143,9 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
     @Override
     public Cursor loadCursorTareas() {
+        if(cursorTareas != null && !cursorTareas.isClosed()){
+            cursorTareas.close();
+        }
         cursorTareas = cr.query(
                 ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
                 null,

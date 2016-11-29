@@ -293,9 +293,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         if(nota.getRutaAudio() != null && !nota.getRutaAudio().equals("")){
             btPlay.setVisibility(View.VISIBLE);
         }
-        Date d = new Date();
-        d.setTime(0);
-        Log.v("d", d.toString());
+        
         /*if(nota.getRecordatorio() != null && !nota.getRecordatorio().toString().substring(30).equals(d.toString().toString().substring(30))) {
             Log.v("recordatorio", nota.getRecordatorio().toString());
             tvRecordatorio.setText(nota.getRecordatorio().toString());
