@@ -18,86 +18,48 @@ import java.io.IOException;
  * Created by dam on 09/11/2016.
  */
 
-public class Audio implements MediaPlayer.OnCompletionListener{
+public class Audio implements MediaPlayer.OnCompletionListener {
     private MediaRecorder recorder;
     private MediaPlayer player;
     private File archivo;
     private AppCompatActivity yo;
     private Context c;
+
     public Audio(AppCompatActivity yo, Context c) {
         this.yo = yo;
         this.c = c;
     }
 
-    public Audio() {
-    }
+    public Audio() {}
 
     public void grabar() {
-        if(ActivityCompat.checkSelfPermission(c, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
-        {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(yo,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                AlertDialog.Builder adb = new AlertDialog.Builder(c);
-                adb.setMessage("El permiso es para accceder al microfono");
-                adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ActivityCompat.requestPermissions(yo,
-                                new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                                123);
-                    }
-                });
+        Boolean permisos = pedirPermisos(c);
+        if (permisos) {
+            Toast.makeText(c, "Grabando...", Toast.LENGTH_SHORT).show();
+            recorder = new MediaRecorder();
+            recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            File path = new File(Environment.getExternalStorageDirectory()
+                    .getPath());
+            try {
+                archivo = File.createTempFile("temporal", ".3gp", path);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            else {
-                ActivityCompat.requestPermissions(yo,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},123);
+            recorder.setOutputFile(archivo.getAbsolutePath());
+            try {
+                recorder.prepare();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+            recorder.start();
+        } else {
 
         }
-        else {
-            if(ActivityCompat.checkSelfPermission(c, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED)
-            {
-                if(ActivityCompat.shouldShowRequestPermissionRationale(yo,android.Manifest.permission.RECORD_AUDIO)){
-                    AlertDialog.Builder adb = new AlertDialog.Builder(c);
-                    adb.setMessage("El permiso es para guardar el audio");
-                    adb.setPositiveButton("OK",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    ActivityCompat.requestPermissions(yo,
-                                            new String[]{android.Manifest.permission.RECORD_AUDIO},101);
-
-                                }
-                            });
-                }
-                else {
-                    ActivityCompat.requestPermissions(yo,
-                            new String[]{android.Manifest.permission.RECORD_AUDIO},101);
-
-                }
-            }
-            else{
-                Toast.makeText(c, "Grabando...", Toast.LENGTH_SHORT).show();
-                recorder = new MediaRecorder();
-                recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-                recorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-                recorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
-                File path = new File(Environment.getExternalStorageDirectory()
-                        .getPath());
-                try {
-                    archivo = File.createTempFile("temporal", ".3gp", path);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                recorder.setOutputFile(archivo.getAbsolutePath());
-                try {
-                    recorder.prepare();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                recorder.start();
-            }
-        }
-
     }
+
+
     public void detener() {
         recorder.stop();
         recorder.release();
@@ -127,12 +89,55 @@ public class Audio implements MediaPlayer.OnCompletionListener{
         }
         player.start();
     }
+
     @Override
     public void onCompletion(MediaPlayer mp) {
         Toast.makeText(c, "Audio Finalizado", Toast.LENGTH_SHORT).show();
     }
 
-    public File getArchivo(){
+    public File getArchivo() {
         return archivo;
     }
+
+    private boolean pedirPermisos(Context c) {
+        if (ActivityCompat.checkSelfPermission(c, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(c, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(yo, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(c);
+                adb.setMessage("El permiso es para accceder al microfono");
+                adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(yo,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},123);
+                    }
+                });
+            }else{
+                ActivityCompat.requestPermissions(yo, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 123);
+            }
+            if (ActivityCompat.shouldShowRequestPermissionRationale(yo, android.Manifest.permission.RECORD_AUDIO)) {
+                AlertDialog.Builder adb = new AlertDialog.Builder(c);
+                adb.setMessage("El permiso es para guardar el audio");
+                adb.setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        ActivityCompat.requestPermissions(yo,new String[]{android.Manifest.permission.RECORD_AUDIO}, 101);
+                    }
+                    });
+            }else{
+                ActivityCompat.requestPermissions(yo, new String[]{android.Manifest.permission.RECORD_AUDIO}, 101);
+
+            }
+            if(ActivityCompat.checkSelfPermission(c, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(c, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED){
+                return true;
+            }else{
+                return false;
+            }
+
+        }else if (ActivityCompat.checkSelfPermission(c, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(c, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        return false;
+        //TODO Falta que se inicie audio despues de pedir permisos
+    }
+
 }
+

@@ -154,6 +154,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         btPDF = (ImageView)findViewById(R.id.btPDF);
         btPDF.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                saveNota();
                 p.generarPDF(nota.getTitulo(), nota.getNota(), nota.getRutaImagen());
                 Toast.makeText(VistaNota.this, "PDF guardado", Toast.LENGTH_SHORT).show();
             }
