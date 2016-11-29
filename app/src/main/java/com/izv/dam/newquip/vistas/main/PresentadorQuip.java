@@ -15,11 +15,6 @@ public class PresentadorQuip implements ContratoMain.InterfacePresentador{
     }
 
     @Override
-    public void onPause() {
-        this.modelo.close();
-    }
-
-    @Override
     public void onResume() {
         if(this.modelo.getCursorNotas() == null && this.modelo.getCursorTareas() == null) {
             this.vista.showNotas(

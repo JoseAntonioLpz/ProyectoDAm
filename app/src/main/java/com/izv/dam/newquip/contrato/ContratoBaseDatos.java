@@ -22,7 +22,7 @@ public class ContratoBaseDatos {
         public static final String REALIZADO = "realizado"; // Booleano checkbox
         public static final String IMAGEN = "imagen"; // URL de la imagen o imagen en si(?) cuando el tipo es lista este campo es null
         public static final String FECHA = "fecha"; // Fecha cuando se escribio la nota o lista
-        //public static final String RECORDATORIO = "recordatorio";
+        public static final String RECORDATORIO = "recordatorio";
         public static final String AUDIO = "audio";//Audio de cada nota, puede ser null, solo en nota simples
         public static final String[] PROJECTION_ALL = {_ID, TIPO, TITULO, NOTA, REALIZADO, IMAGEN, FECHA/*, RECORDATORIO*/, AUDIO};
         public static final String SORT_ORDER_DEFAULT = _ID + " desc";

@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
 import com.izv.dam.newquip.util.UtilFecha;
@@ -27,9 +26,9 @@ public class Nota  implements Parcelable{
     private String rutaAudio = "";
     private Date fecha;
     private List<Tarea> tareas;
-    private Date recordatorio;
+    private String recordatorio;
 
-    public Nota(long id, int tipo, String titulo, String nota, boolean realizado, Date fecha/*, Date recordatorio*/) {
+    public Nota(long id, int tipo, String titulo, String nota, boolean realizado, Date fecha, String recordatorio) {
         this.id = id;
         this.tipo = tipo;
         this.titulo = titulo;
@@ -39,12 +38,11 @@ public class Nota  implements Parcelable{
         this.rutaAudio = "";
         this.tareas = new ArrayList<>();
         this.fecha = fecha;
-        //this.recordatorio = recordatorio;
-
+        this.recordatorio = recordatorio;
     }
 
     public Nota() {
-        this(0, 0, null, null, false, new Date()/*, null*/);
+        this(0, 0, null, null, false, new Date(), null);
     }
 
 
@@ -57,10 +55,8 @@ public class Nota  implements Parcelable{
         realizado = in.readByte() != 0;
         rutaImagen = in.readString();
         tareas = new ArrayList<Tarea>();
-        //in.readTypedList(tareas, Tarea.CREATOR);
-        Log.v("Nota", "Parcel tareas " + tareas.size());
         fecha = new Date(UtilFecha.dateToLong(in.readString()));
-        //recordatorio = new Date(UtilFecha.dateToLong(in.readString()));
+        recordatorio = in.readString();
     }
 
     public static final Creator<Nota> CREATOR = new Creator<Nota>() {
@@ -131,11 +127,11 @@ public class Nota  implements Parcelable{
         this.fecha = fecha;
     }
 
-    public Date getRecordatorio() {
+    public String getRecordatorio() {
         return recordatorio;
     }
 
-    public void setRecordatorio(Date recordatorio) {
+    public void setRecordatorio(String recordatorio) {
         this.recordatorio = recordatorio;
     }
 
@@ -168,8 +164,7 @@ public class Nota  implements Parcelable{
         valores.put(ContratoBaseDatos.TablaNota.IMAGEN, this.getRutaImagen());
         valores.put(ContratoBaseDatos.TablaNota.AUDIO, this.getRutaAudio());
         valores.put(ContratoBaseDatos.TablaNota.FECHA, UtilFecha.formatDate(this.getFecha()));
-        //valores.put(ContratoBaseDatos.TablaNota.RECORDATORIO, UtilFecha.formatDate(this.getRecordatorio()));
-        //valores.put(ContratoBaseDatos.TablaTareas.TAREA, String.valueOf(this.getTareas()));
+        valores.put(ContratoBaseDatos.TablaNota.RECORDATORIO, this.getRecordatorio());
         return valores;
     }
 
@@ -188,9 +183,9 @@ public class Nota  implements Parcelable{
         String f = c.getString(c.getColumnIndex(ContratoBaseDatos.TablaNota.FECHA));
         if (f != null)
             objeto.setFecha(new Date(UtilFecha.dateToLong(f)));
-        /*String r = c.getString(c.getColumnIndex(ContratoBaseDatos.TablaNota.RECORDATORIO));
-        if(r != null)
-            objeto.setRecordatorio(new Date(UtilFecha.dateToLong(r)));*/
+        String r = c.getString(c.getColumnIndex(ContratoBaseDatos.TablaNota.RECORDATORIO));
+        if (r != null)
+            objeto.setRecordatorio(r);
         return objeto;
     }
 
@@ -240,8 +235,10 @@ public class Nota  implements Parcelable{
                 ", titulo='" + titulo + '\'' +
                 ", nota='" + nota + '\'' +
                 ", realizado=" + realizado +
-                ", imagen=" + rutaImagen +
+                ", rutaImagen='" + rutaImagen + '\'' +
+                ", rutaAudio='" + rutaAudio + '\'' +
                 ", fecha=" + fecha +
+                ", recordatorio='" + recordatorio +
                 ", tareas=" + ts +
                 '}';
     }
@@ -260,10 +257,8 @@ public class Nota  implements Parcelable{
         dest.writeByte((byte) (realizado ? 1 : 0));
         dest.writeString(rutaImagen);
         dest.writeString(rutaAudio);
-        Log.v("Nota", "writing " + tareas.size() + " tareas");
-        //dest.writeTypedList(tareas);
         dest.writeString(fecha.toString());
-        //dest.writeString(recordatorio.toString());
+        dest.writeString(recordatorio);
     }
 
     public String getRutaImagen() {

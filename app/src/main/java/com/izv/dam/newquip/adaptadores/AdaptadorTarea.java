@@ -54,11 +54,8 @@ public class AdaptadorTarea extends RecyclerView.Adapter<AdaptadorTarea.ViewHold
                 list.get(position).setRealizado(b);
             }
         });
-        if (tarea.getTarea().equals("")) {
-            holder.etTarea.setText("Nueva tarea");
-        } else {
-            holder.etTarea.setText(tarea.getTarea());
-        }
+        holder.etTarea.setText(tarea.getTarea());
+
         holder.etTarea.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {

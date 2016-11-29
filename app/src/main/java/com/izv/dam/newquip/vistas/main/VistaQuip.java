@@ -109,12 +109,6 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
     }
 
     @Override
-    protected void onPause() {
-        presentador.onPause();
-        super.onPause();
-    }
-
-    @Override
     protected void onResume() {
         presentador.onResume();
         super.onResume();

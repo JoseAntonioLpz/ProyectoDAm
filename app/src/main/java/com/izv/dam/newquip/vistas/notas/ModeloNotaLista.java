@@ -10,6 +10,8 @@ import com.izv.dam.newquip.contrato.ContratoNotaLista;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.pojo.Tarea;
 
+import java.util.Date;
+
 /**
  * Created by dam on 25/10/2016.
  */
@@ -24,6 +26,7 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     @Override
     public long saveNota(Nota n) {
+        n.setFecha(new Date());
         if(n.getId() == 0){
             return insertNota(n);
         }else{

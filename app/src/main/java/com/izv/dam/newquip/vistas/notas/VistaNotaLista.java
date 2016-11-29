@@ -131,4 +131,5 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
         super.onSaveInstanceState(outState);
         outState.putParcelable("nota", nota);
     }
+
 }

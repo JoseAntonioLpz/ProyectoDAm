@@ -31,8 +31,6 @@ public interface ContratoMain {
 
     interface InterfacePresentador {
 
-        void onPause();
-
         void onResume();
 
         void onAddNota(int tipo);

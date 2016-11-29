@@ -131,11 +131,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/btPlay"
-            android:visibility="gone"
+            android:visibility="visible"
             android:background="@android:drawable/ic_lock_silent_mode_off"
             android:text="Play" />
 
     </LinearLayout>
+
+    <TextView
+        android:text="No hay recordatorio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recordatorio"
+        android:layout_above="@+id/tablelayout" />
 
     <ImageView
         android:layout_width="30dp"
@@ -175,63 +182,12 @@
                 android:id="@+id/ivDetenerAudio"
                 android:layout_alignParentTop="true"
                 android:layout_toStartOf="@+id/btSave"
-                android:layout_weight="163.80"
-                android:layout_height="300dp"
+                android:layout_weight="0.30"
+                android:layout_height="30dp"
                 android:paddingRight="10dp"
-                android:visibility="gone" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tvRecordatorio"
-                android:textAllCaps="false"
-                android:textStyle="normal|italic"
-                android:textAlignment="viewStart" />
+                android:visibility="visible" />
         </LinearLayout>
     </LinearLayout>
-
-    <!--<com.getbase.floatingactionbutton.FloatingActionsMenu
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/btnFlotNot"
-    app:fab_addButtonColorNormal="@color/colorAccent"
-    app:fab_addButtonColorPressed="@color/colorAccent"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginBottom="20dp"
-    app:fab_expandDirection="left"
-    android:visibility="visible"
-    android:layout_marginEnd="14dp"
-    android:layout_alignParentBottom="true"
-    android:layout_alignParentEnd="true">-->
-    <!--Estas son las caracteristicas de los botoncitos del menu-->
-    <!--<com.getbase.floatingactionbutton.FloatingActionButton
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/add_foto"
-         app:fab_icon="@drawable/ic_menu_camera"
-         app:fab_size="mini"
-         app:fab_title="@string/BtAddNota"
-         />
-
-     <com.getbase.floatingactionbutton.FloatingActionButton
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/add_galeria"
-         app:fab_icon="@drawable/ic_menu_gallery"
-         app:fab_size="mini"
-         app:fab_title="@string/BtAddlista"
-         app:elevation="0dp" />
-     <com.getbase.floatingactionbutton.FloatingActionButton
-         android:layout_width="wrap_content"
-         android:layout_height="wrap_content"
-         android:id="@+id/btnModalBottomSheet"
-         app:fab_icon="@drawable/ic_android_black_24dp"
-         app:fab_size="mini"
-         app:fab_title="@string/BtAddlista"
-         app:elevation="0dp" />
-
- </com.getbase.floatingactionbutton.FloatingActionsMenu>-->
-
 
 </RelativeLayout>
 
