@@ -1,12 +1,14 @@
 package com.izv.dam.newquip.vistas.notas;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,6 +21,7 @@ import android.widget.Toast;
 import com.izv.dam.newquip.R;
 import com.izv.dam.newquip.adaptadores.AdaptadorTarea;
 import com.izv.dam.newquip.contrato.ContratoNotaLista;
+import com.izv.dam.newquip.databinding.ActivityNotaListaBinding;
 import com.izv.dam.newquip.pdf.Pdf;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.pojo.Tarea;
@@ -45,7 +48,10 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_nota_lista);
+        ActivityNotaListaBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_nota_lista);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         presentador = new PresentadorNotaLista(this);
 
@@ -141,11 +147,12 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 rvTareas.scrollToPosition(0);
             }
         });
+        binding.setNota(nota);
     }
 
     @Override
     public void showNota(Nota n) {
-        etTitulo.setText(n.getTitulo());
+        //etTitulo.setText(n.getTitulo());
     }
 
     @Override

@@ -6,18 +6,19 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
+import com.izv.dam.newquip.contrato.ContratoContentProvider;
 
 public class Ayudante extends SQLiteOpenHelper {
     //sqlite
     //tipos de datos https://www.sqlite.org/datatype3.html
     //fechas https://www.sqlite.org/lang_datefunc.html
     //trigger https://www.sqlite.org/lang_createtrigger.html
-    private static final int VERSION =13;
+    private static final int VERSION =15;
     private static StringBuilder queryNota;
     private static StringBuilder queryTareas;
 
     public Ayudante(Context context) {
-        super(context, ContratoBaseDatos.BASEDATOS, null, VERSION);
+        super(context, ContratoContentProvider.BASEDATOS, null, VERSION);
         initQuerys();
     }
 
@@ -37,6 +38,9 @@ public class Ayudante extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         Log.v("Ayudante", "Updating DataBase ...");
+        /*db.execSQL("drop table if exists " + ContratoBaseDatos.TablaNota.TABLA);
+        db.execSQL("drop table if exists " + ContratoBaseDatos.TablaTareas.TABLA);
+        onCreate(db);*/
         //Actualización de la tabla nota
         String query = "create table backupnota as select * from  " + ContratoBaseDatos.TablaNota.TABLA;
         db.execSQL(query);

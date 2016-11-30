@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 
 import com.izv.dam.newquip.basedatos.Ayudante;
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
+import com.izv.dam.newquip.contrato.ContratoContentProvider;
 
 /**
  * Created by JoseAntonio on 29/10/2016.
@@ -35,10 +36,10 @@ public class Proveedor extends ContentProvider {
     //Inicializamos el UriMatcher
     static {
         URI_MATCHER = new UriMatcher(UriMatcher.NO_MATCH);
-        URI_MATCHER.addURI(ContratoBaseDatos.AUTHORITY, ContratoBaseDatos.TablaNota.TABLA, NOTAS);
-        URI_MATCHER.addURI(ContratoBaseDatos.AUTHORITY, ContratoBaseDatos.TablaNota.TABLA + "/#", NOTAS_ID);
-        URI_MATCHER.addURI(ContratoBaseDatos.AUTHORITY, ContratoBaseDatos.TablaTareas.TABLA, TAREAS);
-        URI_MATCHER.addURI(ContratoBaseDatos.AUTHORITY, ContratoBaseDatos.TablaTareas.TABLA + "/#", TAREAS_ID);
+        URI_MATCHER.addURI(ContratoContentProvider.AUTHORITY, ContratoBaseDatos.TablaNota.TABLA, NOTAS);
+        URI_MATCHER.addURI(ContratoContentProvider.AUTHORITY, ContratoBaseDatos.TablaNota.TABLA + "/#", NOTAS_ID);
+        URI_MATCHER.addURI(ContratoContentProvider.AUTHORITY, ContratoBaseDatos.TablaTareas.TABLA, TAREAS);
+        URI_MATCHER.addURI(ContratoContentProvider.AUTHORITY, ContratoBaseDatos.TablaTareas.TABLA + "/#", TAREAS_ID);
         //URI_MATCHER.addURI(ContratoBaseDatos.AUTHORITY, ContratoBaseDatos.TablaTareas.TABLA + "/" + ContratoBaseDatos.TablaNota.TABLA + "/#", TAREAS_NOTA_ID);
         //URI_MATCHER.addURI(ContratoBaseDatos.AUTHORITY, "JOIN", JOIN);
     }
@@ -125,13 +126,13 @@ public class Proveedor extends ContentProvider {
             case NOTAS : {
                 id = bd.insert(ContratoBaseDatos.TablaNota.TABLA, null, values);
                 //id = gn.insert(values);
-                Uri newUri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, id);
+                Uri newUri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, id);
                 return newUri;
             }
             case TAREAS : {
                 id = bd.insert(ContratoBaseDatos.TablaTareas.TABLA, null, values);
                 //id = gt.insert(values);
-                Uri newUri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, id);
+                Uri newUri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_TAREA, id);
                 return newUri;
             }
             default: {

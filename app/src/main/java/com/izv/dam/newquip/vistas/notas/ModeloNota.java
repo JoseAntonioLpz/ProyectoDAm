@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
+import com.izv.dam.newquip.contrato.ContratoContentProvider;
 import com.izv.dam.newquip.contrato.ContratoNota;
 import com.izv.dam.newquip.pojo.Nota;
 
@@ -26,7 +27,7 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
     @Override
     public Nota getNota(long id) {
         Log.v("ModeloNota", "getNota(), id: " + id);
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, id);
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, id);
         Cursor c = cr.query(
                 uri,
                 ContratoBaseDatos.TablaNota.PROJECTION_ALL,
@@ -51,7 +52,7 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
 
     private long deleteNota(Nota n) {
         Log.v("ModeloNota", "deleteNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, n.getId());
         return cr.delete(
                 uri,
                 "",
@@ -66,14 +67,14 @@ public class ModeloNota implements ContratoNota.InterfaceModelo {
             return 0;
         }
         return ContentUris.parseId(cr.insert(
-                ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                ContratoContentProvider.CONTENT_URI_NOTA,
                 n.getContentValues(false)
         ));
     }
 
     private int updateNota(Nota n) {
         Log.v("ModeloNota", "updateNota(), id: " + n.getId() + ", Titulo: " + n.getTitulo() + ", nota: " + n.getNota());
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, n.getId());
         if((n.getNota() == null || n.getNota().trim().compareTo("")==0) && (n.getTitulo() == null || n.getTitulo().trim().compareTo("")==0)) {
             this.deleteNota(n);
             return 0;

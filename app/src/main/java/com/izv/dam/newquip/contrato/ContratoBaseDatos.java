@@ -5,8 +5,8 @@ import android.provider.BaseColumns;
 
 public class ContratoBaseDatos {
 
-    public final static String BASEDATOS = "quiip.sqlite";
-    public static final String AUTHORITY ="com.izv.dam.newquip.notas";
+    //public final static String BASEDATOS = "quiip.sqlite";
+    //public static final String AUTHORITY ="com.izv.dam.newquip.notas";
 
     private ContratoBaseDatos(){
     }
@@ -27,8 +27,8 @@ public class ContratoBaseDatos {
         public static final String[] PROJECTION_ALL = {_ID, TIPO, TITULO, NOTA, REALIZADO, IMAGEN, FECHA, RECORDATORIO, AUDIO};
         public static final String SORT_ORDER_DEFAULT = _ID + " desc";
 
-        public static final String URI_NOTA ="content://"+AUTHORITY+"/"+ContratoBaseDatos.TablaNota.TABLA;
-        public static final Uri CONTENT_URI_NOTA = Uri.parse(URI_NOTA);
+        //public static final String URI_NOTA ="content://"+AUTHORITY+"/"+ContratoBaseDatos.TablaNota.TABLA;
+        //public static final Uri CONTENT_URI_NOTA = Uri.parse(URI_NOTA);
     }
 
     public static abstract class TablaTareas implements BaseColumns{
@@ -40,7 +40,7 @@ public class ContratoBaseDatos {
         public static final String[] PROJECTION_ALL = {_ID, ID_NOTA, TAREA, REALIZADA};
         public static final String SORT_ORDER_DEFAULT = _ID + " desc";
 
-        public static final String URI_TAREA ="content://"+AUTHORITY+"/"+ContratoBaseDatos.TablaTareas.TABLA;
-        public static final Uri CONTENT_URI_TAREA = Uri.parse(URI_TAREA);
+        //public static final String URI_TAREA ="content://"+AUTHORITY+"/"+ContratoBaseDatos.TablaTareas.TABLA;
+        //public static final Uri CONTENT_URI_TAREA = Uri.parse(URI_TAREA);
     }
 }

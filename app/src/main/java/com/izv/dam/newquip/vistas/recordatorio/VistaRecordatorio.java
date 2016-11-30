@@ -25,7 +25,6 @@ import java.util.Date;
 public class VistaRecordatorio extends AppCompatActivity{
     private CalendarView calendar;
     private TextView tv1;
-    //Nota nota;
     private String fecha;
     private ImageView guardar;
 
@@ -36,14 +35,6 @@ public class VistaRecordatorio extends AppCompatActivity{
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarRecordatorio);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        /*if (savedInstanceState != null) {
-            nota = savedInstanceState.getParcelable("nota");
-        } else {
-            Bundle b = getIntent().getExtras();
-            if(b != null ) {
-                nota = b.getParcelable("nota");
-            }
-        }*/
         calendar = (CalendarView)findViewById(R.id.calendar);
         tv1 = (TextView)findViewById(R.id.tv1);
         guardar = (ImageView)findViewById(R.id.guardar);
@@ -54,7 +45,6 @@ public class VistaRecordatorio extends AppCompatActivity{
                 i1++;
                 tv1.setText("Recordatorio: "+ i2 +" / "+ i1 +" / "+ i );
                 fecha = i +"-"+ i1 +"-"+ i2;
-                //nota.setRecordatorio(fecha);
             }
 
         });
@@ -71,9 +61,4 @@ public class VistaRecordatorio extends AppCompatActivity{
         setResult(Activity.RESULT_OK,returnIntent);
         finish();
     }
-    /*@Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable("nota", nota);
-    }*/
 }

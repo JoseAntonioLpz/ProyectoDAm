@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.util.Log;
 
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
+import com.izv.dam.newquip.contrato.ContratoContentProvider;
 import com.izv.dam.newquip.contrato.ContratoMain;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.preferences.UserPreferences;
@@ -48,7 +49,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     }
 
     private void updateNota(Nota n){
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, n.getId());
         cr.update(
                 uri,
                 n.getContentValues(true),
@@ -68,11 +69,11 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     }
 
     private long deleteNota(Nota n) {
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,n.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA,n.getId());
         if (n.getTipo() == Nota.NOTA_LISTA) {
             String where = ContratoBaseDatos.TablaTareas.ID_NOTA + " =? ";
             String[] argumentos = new String[]{String.valueOf(n.getId())};
-            cr.delete(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, where, argumentos);
+            cr.delete(ContratoContentProvider.CONTENT_URI_TAREA, where, argumentos);
         }
         return cr.delete(uri,"",null);
     }
@@ -97,7 +98,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
         this.filter = filter;
         if(filter == ALL){//Todas las notas
             cursorNotas = cr.query(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    ContratoContentProvider.CONTENT_URI_NOTA,
                     null,
                     null,
                     null ,
@@ -105,7 +106,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
             );
         }else if(filter == ONLY_NOTES){//Notas
             cursorNotas = cr.query(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    ContratoContentProvider.CONTENT_URI_NOTA,
                     null,
                     ContratoBaseDatos.TablaNota.TIPO + " = " + Nota.NOTA_SIMPLE,
                     null ,
@@ -113,7 +114,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
             );
         }else if(filter == ONLY_LISTS){//Listas
             cursorNotas = cr.query(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    ContratoContentProvider.CONTENT_URI_NOTA,
                     null,
                     ContratoBaseDatos.TablaNota.TIPO + " = " + Nota.NOTA_LISTA,
                     null ,
@@ -121,7 +122,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
             );
         }else if(filter == WITH_REMINDER){//Recordatorios
             cursorNotas = cr.query(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    ContratoContentProvider.CONTENT_URI_NOTA,
                     null,
                     ContratoBaseDatos.TablaNota.RECORDATORIO + " is not null and " + ContratoBaseDatos.TablaNota.RECORDATORIO + " <> '' ",
                     null ,
@@ -129,7 +130,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
             );
         }else if(filter == COMPLETED){//Completadas
             cursorNotas = cr.query(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    ContratoContentProvider.CONTENT_URI_NOTA,
                     null,
                     ContratoBaseDatos.TablaNota.REALIZADO + " = " + 1,
                     null ,
@@ -137,7 +138,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
             );
         }else if(filter == NOT_COMPLETED){//No completadas
             cursorNotas = cr.query(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    ContratoContentProvider.CONTENT_URI_NOTA,
                     null,
                     ContratoBaseDatos.TablaNota.REALIZADO + " = " + 0,
                     null ,
@@ -153,7 +154,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
             cursorTareas.close();
         }
         cursorTareas = cr.query(
-                ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
+                ContratoContentProvider.CONTENT_URI_TAREA,
                 null,
                 null,
                 null ,

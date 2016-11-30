@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.itextpdf.text.Document;
@@ -30,7 +29,6 @@ public class Pdf{
     private static final String GENERADOS = "MisArchivos";
     private AppCompatActivity yo;
     private Context c;
-    ImageView btnPdf;
 
     public Pdf(AppCompatActivity yo, Context c){
         this.yo = yo;

@@ -21,8 +21,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.izv.dam.newquip.R;
-import com.izv.dam.newquip.pojo.Nota;
-import com.izv.dam.newquip.vistas.notas.VistaNota;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,7 +45,6 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
     float pgrande;
     float pdefecto;
     int GUARDAR_DIBUJO = 200;
-    //Nota nota;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,11 +54,11 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        negro = (ImageButton)findViewById(R.id.colornegro);
-        verde = (ImageButton)findViewById(R.id.colorverde);
-        azul = (ImageButton)findViewById(R.id.colorazul);
-        rojo = (ImageButton)findViewById(R.id.colorrojo);
-        amarillo = (ImageButton)findViewById(R.id.coloramarillo);
+        negro = (ImageButton) findViewById(R.id.colornegro);
+        verde = (ImageButton) findViewById(R.id.colorverde);
+        azul = (ImageButton) findViewById(R.id.colorazul);
+        rojo = (ImageButton) findViewById(R.id.colorrojo);
+        amarillo = (ImageButton) findViewById(R.id.coloramarillo);
 
         negro.setOnClickListener(this);
         verde.setOnClickListener(this);
@@ -69,7 +66,7 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
         rojo.setOnClickListener(this);
         amarillo.setOnClickListener(this);
 
-        lienzo = (Lienzo)findViewById(R.id.lienzo);
+        lienzo = (Lienzo) findViewById(R.id.lienzo);
 
 
         ppequenyo = 10;
@@ -77,22 +74,6 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
         pgrande = 30;
 
         pdefecto = pmediano;
-
-        /*if (savedInstanceState != null) {
-            nota = savedInstanceState.getParcelable("nota");
-            String color = savedInstanceState.getString("color");
-            float grosor = savedInstanceState.getFloat("grosor");
-            lienzo.setColor(color);
-            lienzo.setTamanyoPunto(grosor);
-        } else {
-            Bundle b = getIntent().getExtras();
-            if (b != null) {
-                nota = b.getParcelable("nota");
-            }
-            else {
-                nota= new Nota();
-            }
-        }*/
 
     }
 
@@ -146,7 +127,7 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
                 return true;
 
             case R.id.guardar:
-                PermisosDibujo();
+                //PermisosDibujo();
 
                 AlertDialog.Builder salvarDibujo = new AlertDialog.Builder(this);
                 salvarDibujo.setTitle("Salvar dibujo");
@@ -176,12 +157,6 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
                             }
                             MediaStore.Images.Media.insertImage(getContentResolver(),file.getAbsolutePath(),file.getName(),file.getName());
                             Toast.makeText(getApplicationContext(),"¡Dibujo salvado en la galeria!", Toast.LENGTH_SHORT).show();
-                            /*nota.setRutaImagen(file.getAbsolutePath());
-                            Intent i = new Intent(VistaDrawer.this, VistaNota.class);
-                            Bundle b = new Bundle();
-                            b.putParcelable("nota",nota);
-                            i.putExtras(b);
-                            startActivityForResult(i,400);*/
                             cierraYguarda(file.getAbsolutePath());
                         } catch (FileNotFoundException e) {
                             e.printStackTrace();
@@ -232,59 +207,6 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
             default:
 
                 break;
-        }
-    }
-
-    public void PermisosDibujo(){
-
-        //guardar = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        /**
-         * ¿Tengo el permiso para hacer la accion?
-         */                                                                             ///PERMISO CONCENDIDO
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-            // startActivity(guardar);
-            Toast.makeText(this, "1 Permiso Concedido", Toast.LENGTH_SHORT).show();
-        } else {
-            solicitarPermisoHacerLlamada();
-        }
-    }
-
-    /*@Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable("nota", nota);
-        outState.putFloat("grosor",lienzo.getTamanyoPunto());
-        outState.putString("color",lienzo.getColor());
-    }*/
-
-    private void solicitarPermisoHacerLlamada() {
-        //Pedimos el permiso o los permisos con un cuadro de dialogo del sistema
-        ActivityCompat.requestPermissions(this,
-                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, GUARDAR_DIBUJO);
-
-
-        Toast.makeText(this, "2.2 Pedimos el permiso con un cuadro de dialogo del sistema", Toast.LENGTH_SHORT).show();
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        /**
-         * Si tubieramos diferentes permisos solicitando permisos de la aplicacion, aqui habria varios IF
-         */
-        if (requestCode == GUARDAR_DIBUJO) {
-
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                //Realizamos la accion
-                //  startActivity(guardar);
-                Toast.makeText(this, "3.1 Permiso Concedido", Toast.LENGTH_SHORT).show();
-            } else {
-                //1-Seguimos el proceso de ejecucion sin esta accion: Esto lo recomienda Google
-                //2-Cancelamos el proceso actual
-                //3-Salimos de la aplicacion
-                Toast.makeText(this, "3.2 Permiso No Concedido", Toast.LENGTH_SHORT).show();
-            }
         }
     }
     private void cierraYguarda(String ruta){

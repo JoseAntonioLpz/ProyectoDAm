@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.Uri;
 
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
+import com.izv.dam.newquip.contrato.ContratoContentProvider;
 import com.izv.dam.newquip.contrato.ContratoNotaLista;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.pojo.Tarea;
@@ -47,7 +48,7 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
 
     @Override
     public void deleteTarea(long id) {
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, id);
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_TAREA, id);
         cr.delete(
                 uri,
                 "",
@@ -58,7 +59,7 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     private long insertNota(Nota n){
         long id = ContentUris.parseId(
                 cr.insert(
-                        ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                        ContratoContentProvider.CONTENT_URI_NOTA,
                         n.getContentValues(false)
                 )
         );
@@ -72,7 +73,7 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     }
 
     private void updateNota(Nota n){
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, n.getId());
         cr.update(
                 uri,
                 n.getContentValues(true),
@@ -93,7 +94,7 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
         for (Tarea t : n.getTareas()) {
             deleteTarea(t.getId());
         }
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_NOTA, n.getId());
         cr.delete(
                 uri,
                 "",
@@ -104,14 +105,14 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     private long insertTarea(Tarea t){
         return ContentUris.parseId(
                 cr.insert(
-                        ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA,
+                        ContratoContentProvider.CONTENT_URI_TAREA,
                         t.getContentValues(false)
                 )
         );
     }
 
     private void updateTarea(Tarea t){
-        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaTareas.CONTENT_URI_TAREA, t.getId());
+        Uri uri = ContentUris.withAppendedId(ContratoContentProvider.CONTENT_URI_TAREA, t.getId());
         cr.update(
                 uri,
                 t.getContentValues(true),

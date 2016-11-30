@@ -142,10 +142,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, VistaDrawer.class);
-                //Bundle b = new Bundle();
-                //guardarDatosNota();
-                /*b.putParcelable("nota", nota);
-                intent.putExtras(b);*/
                 startActivityForResult(intent,ACTIVIDAD_DRAWER);
             }
         });
@@ -293,11 +289,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         if(nota.getRutaAudio() != null && !nota.getRutaAudio().equals("")){
             btPlay.setVisibility(View.VISIBLE);
         }
-        
-        /*if(nota.getRecordatorio() != null && !nota.getRecordatorio().toString().substring(30).equals(d.toString().toString().substring(30))) {
-            Log.v("recordatorio", nota.getRecordatorio().toString());
-            tvRecordatorio.setText(nota.getRecordatorio().toString());
-       }*/
     }
 
     private void saveNota() {
@@ -318,9 +309,4 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         }
         Log.v("VistaNota", "Id nota guardada: " + nota.getId());
     }
-
-    /*private void guardarDatosNota() {
-        nota.setTitulo(editTextTitulo.getText().toString());
-        nota.setNota(editTextNota.getText().toString());
-    }*/
 }
