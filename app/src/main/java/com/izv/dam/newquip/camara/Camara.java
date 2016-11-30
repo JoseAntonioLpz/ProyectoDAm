@@ -32,11 +32,11 @@ public class Camara {
     public Camara() {}
 
     public void openCamara(Context c) {
-        Boolean permisos = pedirPermisos(c);
-        if(permisos){
+        //Boolean permisos = pedirPermisos(c);
+        //if(permisos){
             Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             yo.startActivityForResult(intent, ACTIVIDAD_FOTO);
-        }
+        //}
     }
     public static Bitmap drawableToBitmap (Drawable drawable) {
         Bitmap bitmap = null;
@@ -72,10 +72,10 @@ public class Camara {
         // recreate the new Bitmap
         return Bitmap.createBitmap(mBitmap, 0, 0, width, height, matrix, false);
     }
-    private Boolean pedirPermisos(Context c){
+    /*private Boolean pedirPermisos(Context c){
         if(ActivityCompat.checkSelfPermission(c, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(c, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
             if(!ActivityCompat.shouldShowRequestPermissionRationale(yo,android.Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-                /*AlertDialog.Builder adb = new AlertDialog.Builder(c);
+                AlertDialog.Builder adb = new AlertDialog.Builder(c);
                 adb.setMessage("El permiso es para guardar la imagen");
                 adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -83,7 +83,7 @@ public class Camara {
                         ActivityCompat.requestPermissions(yo,
                                 new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISO_EXTERNO);
                     }
-                });*/
+                });
                 ActivityCompat.requestPermissions(yo,new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},PERMISO_EXTERNO);
             }
             else {
@@ -91,7 +91,7 @@ public class Camara {
             }
             if(ActivityCompat.checkSelfPermission(c, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 if(!ActivityCompat.shouldShowRequestPermissionRationale(yo,android.Manifest.permission.CAMERA)){
-                   /* AlertDialog.Builder adb = new AlertDialog.Builder(c);
+                   AlertDialog.Builder adb = new AlertDialog.Builder(c);
                     adb.setMessage("El permiso es para guardar la imagen");
                     adb.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
@@ -99,10 +99,9 @@ public class Camara {
                             ActivityCompat.requestPermissions(yo,
                                     new String[]{android.Manifest.permission.CAMERA},PERMISO_CAMARA);
                         }
-                    });*/
+                    });
                     ActivityCompat.requestPermissions(yo, new String[]{android.Manifest.permission.CAMERA},PERMISO_CAMARA);
-                }
-                else {
+                } else {
                     //ActivityCompat.requestPermissions(yo, new String[]{android.Manifest.permission.CAMERA},PERMISO_CAMARA);
                 }
             }
@@ -116,6 +115,5 @@ public class Camara {
             return true;
         }
         return false;
-        //TODO Falta que se inicie camara despues de pedir permisos
-    }
+    }*/
 }

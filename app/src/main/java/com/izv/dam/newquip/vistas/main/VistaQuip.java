@@ -1,10 +1,14 @@
 package com.izv.dam.newquip.vistas.main;
 
+import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -110,6 +114,7 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
         navigationView.setNavigationItemSelectedListener(this);
 
         pbLoading = (ProgressBar) findViewById(R.id.pbLoading);
+        pedirPermisos();
     }
 
     @Override
@@ -202,6 +207,23 @@ public class VistaQuip extends AppCompatActivity implements ContratoMain.Interfa
             pbLoading.setVisibility(View.VISIBLE);
         }else{
             pbLoading.setVisibility(View.GONE);
+        }
+    }
+
+    private void pedirPermisos(){
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, 123);
+
+            }
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.RECORD_AUDIO)) {
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.RECORD_AUDIO}, 101);
+            }
+            if(!ActivityCompat.shouldShowRequestPermissionRationale(this,android.Manifest.permission.CAMERA)){
+                ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.CAMERA},124);
+            }
+        }else{
+            System.out.println("Permisos concedidos");
         }
     }
 }

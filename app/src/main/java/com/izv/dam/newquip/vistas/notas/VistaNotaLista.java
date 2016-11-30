@@ -1,5 +1,6 @@
 package com.izv.dam.newquip.vistas.notas;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -13,13 +14,17 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.izv.dam.newquip.R;
 import com.izv.dam.newquip.adaptadores.AdaptadorTarea;
 import com.izv.dam.newquip.contrato.ContratoNotaLista;
+import com.izv.dam.newquip.pdf.Pdf;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.pojo.Tarea;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -34,6 +39,10 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
     private RecyclerView rvTareas;
     private AdaptadorTarea adaptador;
     private Nota nota = new Nota();
+    private ImageView ivPdf;
+    private ImageView ivBorrar;
+    private AppCompatActivity yo = this;
+    private Context context = this;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +54,8 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
 
         presentador = new PresentadorNotaLista(this);
         etTitulo = (EditText) findViewById(R.id.etTitulo);
+        ivPdf = (ImageView) findViewById(R.id.ivPdf);
+        ivBorrar = (ImageView) findViewById(R.id.ivBorrar);
         etTitulo.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -108,6 +119,27 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 //adaptador.notifyItemInserted(0);
                 adaptador.notifyDataSetChanged();
                 rvTareas.scrollToPosition(0);
+            }
+        });
+        //PDFS
+        final Pdf p = new Pdf(yo,context);
+        ivPdf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                p.generarPDF(nota);
+            }
+        });
+        //BorrarTodo
+        ivBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i = nota.getTareas().size()-1 ; i >= 0 ; i--) {
+                    Toast.makeText(yo, "Tareas borradas" , Toast.LENGTH_SHORT).show();
+                    presentador.onRemoveTarea(nota.getTareas().get(i).getId());
+                    nota.getTareas().remove(i);
+                    adaptador.notifyItemRemoved(i);
+                }
+
             }
         });
     }

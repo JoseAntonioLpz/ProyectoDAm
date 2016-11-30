@@ -11,15 +11,19 @@ import android.widget.Toast;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.List;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.izv.dam.newquip.pojo.Nota;
+import com.izv.dam.newquip.pojo.Tarea;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 
 public class Pdf{
 
@@ -37,8 +41,8 @@ public class Pdf{
 
     }
 
-    public void generarPDF(String Titulo, String Nota, String RutaImagen ){
-        String NOMBRE_ARCHIVO = Titulo + ".pdf";
+    public void generarPDF(Nota n){
+        String NOMBRE_ARCHIVO = "quip"+ n.getFecha() + ".pdf";
         String tarjetaSD = Environment.getExternalStorageDirectory().toString();
         File pdfDir = new File(tarjetaSD + File.separator + NOMBRE_CARPETA_APP);
         Document document = new Document(PageSize.A4);
@@ -66,10 +70,28 @@ public class Pdf{
             document.addTitle("titulo");
 
             XMLWorkerHelper worker = XMLWorkerHelper.getInstance();
-            String htmlToPDF = "<html><head></head><body>" +
-                    "<h1> Titulo: " + Titulo + "</h1>" +
-                    "<h1> Nota: " + Nota + "</h1>" +
-                    "<img src=\"" + RutaImagen + "\"/></body></html>";
+            String htmlToPDF;
+            if(n.getTipo() == Nota.NOTA_SIMPLE) {
+                htmlToPDF = "<html><head></head><body>" +
+                        "<h1> Titulo: " + n.getTitulo() + "</h1>" +
+                        "<h1> Nota: " + n.getNota() + "</h1>" +
+                        "<img src=\"" + n.getRutaImagen() + "\"/></body></html>";
+            }else{
+                ArrayList <Tarea> t = (ArrayList<Tarea>) n.getTareas();
+                String tarea = "";
+                for (int i = 0; i < t.size(); i++) {
+                    if(t.get(i).isRealizado()) {
+                        tarea += "<h1> + " + t.get(i).getTarea() + "</h1>";
+                    }else{
+                        tarea += "<h1> - " + t.get(i).getTarea() + "</h1>";
+                    }
+                }
+                htmlToPDF = "<html><head></head><body>" +
+                        "<h1> Titulo: " + n.getTitulo() +"</h1>" +
+                        "<h1>Tareas:</h1>"+
+                        tarea +
+                        "</body></html>";
+            }
 
             try {
                 worker.parseXHtml(pdfWriter, document, new StringReader(htmlToPDF));
