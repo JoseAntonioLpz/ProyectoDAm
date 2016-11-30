@@ -14,7 +14,7 @@ public interface ContratoMain {
 
         Nota getNota(int position);
 
-        Cursor loadCursorNotas(int tipo);
+        Cursor loadCursorNotas(int filter);
 
         Cursor loadCursorTareas();
 
@@ -27,6 +27,8 @@ public interface ContratoMain {
         Cursor getCursorTareas();
 
         void close();
+
+        int getFilter();
     }
 
     interface InterfacePresentador {
@@ -38,6 +40,8 @@ public interface ContratoMain {
         void onEditNota(int position);
 
         void onDeleteNota(int position);
+
+        void onTryDeleteNota(int position);
 
         void onUpdateNota(int position, boolean value);
 
@@ -51,11 +55,13 @@ public interface ContratoMain {
 
         void showEditNota(Nota nota);
 
-        void showConfirmDeleteNota(Nota n);
+        void showConfirmDeleteNota(Nota n, int position);
 
         void showNotas(Cursor cursorNotas, Cursor cursoTareas);
 
         void showProgressBar(boolean show);
+
+        void showSelectedFilter(int filter);
 
     }
 

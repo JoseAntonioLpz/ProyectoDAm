@@ -10,25 +10,26 @@ import android.util.Log;
 import com.izv.dam.newquip.contrato.ContratoBaseDatos;
 import com.izv.dam.newquip.contrato.ContratoMain;
 import com.izv.dam.newquip.pojo.Nota;
+import com.izv.dam.newquip.preferences.UserPreferences;
 
 public class ModeloQuip implements ContratoMain.InterfaceModelo {
+
+    public static final int ALL = 0;
+    public static final int ONLY_NOTES = 1;
+    public static final int ONLY_LISTS = 2;
+    public static final int WITH_REMINDER = 3;
+    public static final int COMPLETED = 4;
+    public static final int NOT_COMPLETED = 5;
 
     private ContentResolver cr;
     private Cursor cursorNotas;
     private Cursor cursorTareas;
-    private int tipo;
+    private int filter;
+    private UserPreferences preferences;
 
     public ModeloQuip(Context c) {
         cr = c.getContentResolver();
-        /*for (int i = 0; i < 100; i++) {
-            Nota n = new Nota();
-            n.setTitulo("Nota " + i);
-            n.setFecha(new Date());
-            cr.insert(
-                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
-                    n.getContentValues(false)
-            );
-        }*/
+        preferences = new UserPreferences(c);
     }
 
     @Override
@@ -41,10 +42,9 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     public void updateNota(int position, boolean value) {
         cursorNotas.moveToPosition(position);
         Nota n = Nota.getNota(cursorNotas);
-        System.out.println("UPDATENOTAS" + n.getRecordatorio());
         n.setRealizado(value);
         updateNota(n);
-        this.loadCursorNotas(tipo);
+        this.loadCursorNotas(filter);
     }
 
     private void updateNota(Nota n){
@@ -62,7 +62,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
         cursorNotas.moveToPosition(position);
         Nota n = Nota.getNota(cursorNotas);
         long id = this.deleteNota(n);
-        this.loadCursorNotas(tipo);
+        this.loadCursorNotas(filter);
         this.loadCursorTareas();
         return id;
     }
@@ -90,12 +90,12 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
     }
 
     @Override
-    public Cursor loadCursorNotas(int tipo) {
+    public Cursor loadCursorNotas(int filter) {
         if(cursorNotas != null && !cursorNotas.isClosed()){
             cursorNotas.close();
         }
-        this.tipo = tipo;
-        if(tipo == 0){//Todas las notas
+        this.filter = filter;
+        if(filter == ALL){//Todas las notas
             cursorNotas = cr.query(
                     ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                     null,
@@ -103,7 +103,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
                     null ,
                     ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT
             );
-        }else if(tipo == 1){//Notas
+        }else if(filter == ONLY_NOTES){//Notas
             cursorNotas = cr.query(
                     ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                     null,
@@ -111,7 +111,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
                     null ,
                     ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT
             );
-        }else if(tipo == 2){//Listas
+        }else if(filter == ONLY_LISTS){//Listas
             cursorNotas = cr.query(
                     ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                     null,
@@ -119,10 +119,15 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
                     null ,
                     ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT
             );
-        }else if(tipo == 3){//Recordatorios
-            //TODO implementar recordatorios
-            return null;
-        }else if(tipo == 4){//Completadas
+        }else if(filter == WITH_REMINDER){//Recordatorios
+            cursorNotas = cr.query(
+                    ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
+                    null,
+                    ContratoBaseDatos.TablaNota.RECORDATORIO + " is not null and " + ContratoBaseDatos.TablaNota.RECORDATORIO + " <> '' ",
+                    null ,
+                    ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT
+            );
+        }else if(filter == COMPLETED){//Completadas
             cursorNotas = cr.query(
                     ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                     null,
@@ -130,7 +135,7 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
                     null ,
                     ContratoBaseDatos.TablaNota.SORT_ORDER_DEFAULT
             );
-        }else if(tipo == 5){//No completadas
+        }else if(filter == NOT_COMPLETED){//No completadas
             cursorNotas = cr.query(
                     ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA,
                     null,
@@ -164,6 +169,9 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
     @Override
     public Cursor getCursorNotas() {
+        if(cursorNotas == null){
+            return loadCursorNotas(preferences.getInt(UserPreferences.DEFAULT_FILTER));
+        }
         return cursorNotas;
     }
 
@@ -174,7 +182,14 @@ public class ModeloQuip implements ContratoMain.InterfaceModelo {
 
     @Override
     public Cursor getCursorTareas() {
+        if(cursorTareas == null){
+            return loadCursorTareas();
+        }
         return cursorTareas;
     }
 
+    @Override
+    public int getFilter() {
+        return filter;
+    }
 }

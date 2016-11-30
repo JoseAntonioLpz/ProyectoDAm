@@ -72,24 +72,21 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
     }
 
     private void updateNota(Nota n){
-        if(n.getTitulo().trim().compareTo("") == 0 && n.getTareas().isEmpty()) {
-            this.deleteNota(n);
-        }else {
-            Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
-            cr.update(
-                    uri,
-                    n.getContentValues(true),
-                    "",
-                    new String[]{}
-            );
-            for (Tarea t : n.getTareas()) {
-                if (t.getId() == 0) {
-                    t.setId(insertTarea(t));
-                } else {
-                    updateTarea(t);
-                }
+        Uri uri = ContentUris.withAppendedId(ContratoBaseDatos.TablaNota.CONTENT_URI_NOTA, n.getId());
+        cr.update(
+                uri,
+                n.getContentValues(true),
+                "",
+                new String[]{}
+        );
+        for (Tarea t : n.getTareas()) {
+            if (t.getId() == 0) {
+                t.setId(insertTarea(t));
+            } else {
+                updateTarea(t);
             }
         }
+
     }
 
     private void deleteNota(Nota n){

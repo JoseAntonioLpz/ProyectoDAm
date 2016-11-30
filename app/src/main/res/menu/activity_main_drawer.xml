@@ -18,18 +18,23 @@
             android:id="@+id/nav_recordatorios"
             android:icon="@drawable/ic_alarm_black_24dp"
             android:title="@string/nav_recordatorios" />
+        <item
+            android:id="@+id/nav_completadas"
+            android:icon="@drawable/ic_check_box_black_24dp"
+            android:title="@string/nav_completadas" />
+        <item
+            android:id="@+id/nav_no_completadas"
+            android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
+            android:title="@string/nav_no_completadas" />
 
     </group>
-    <item android:title="TITULO">
+
+    <item android:title="">
         <menu>
             <item
-                android:id="@+id/nav_completadas"
-                android:icon="@drawable/ic_check_box_black_24dp"
-                android:title="@string/nav_completadas" />
-            <item
-                android:id="@+id/nav_no_completadas"
-                android:icon="@drawable/ic_check_box_outline_blank_black_24dp"
-                android:title="@string/nav_no_completadas" />
+                android:id="@+id/nav_preferencias"
+                android:icon="@drawable/ic_settings_black_24dp"
+                android:title="@string/nav_preferencias"/>
         </menu>
     </item>
 </menu>

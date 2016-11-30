@@ -17,16 +17,18 @@ import com.izv.dam.newquip.pojo.Nota;
 
 public class DialogoBorrar extends DialogFragment {
     private Nota n;
+    private int position;
     // Interfaz de comunicación
     OnBorrarDialogListener listener;
 
     public DialogoBorrar() {
     }
 
-    public static DialogoBorrar newInstance(Nota n) {
+    public static DialogoBorrar newInstance(Nota n, int position) {
         DialogoBorrar fragment = new DialogoBorrar();
         Bundle args = new Bundle();
         args.putParcelable("nota",n);
+        args.putInt("position", position);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,6 +38,7 @@ public class DialogoBorrar extends DialogFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             n=getArguments().getParcelable("nota");
+            position = getArguments().getInt("position");
         }
     }
 
@@ -52,7 +55,7 @@ public class DialogoBorrar extends DialogFragment {
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-               listener.onBorrarPossitiveButtonClick(n);
+               listener.onBorrarPossitiveButtonClick(position);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

@@ -1,17 +1,12 @@
 package com.izv.dam.newquip.camara;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 /**
@@ -34,8 +29,8 @@ public class Camara {
     public void openCamara(Context c) {
         //Boolean permisos = pedirPermisos(c);
         //if(permisos){
-            Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-            yo.startActivityForResult(intent, ACTIVIDAD_FOTO);
+        Intent intent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        yo.startActivityForResult(intent, ACTIVIDAD_FOTO);
         //}
     }
     public static Bitmap drawableToBitmap (Drawable drawable) {

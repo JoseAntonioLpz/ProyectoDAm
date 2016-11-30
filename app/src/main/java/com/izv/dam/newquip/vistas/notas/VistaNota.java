@@ -154,7 +154,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         btPDF = (ImageView)findViewById(R.id.btPDF);
         btPDF.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                saveNota();
                 p.generarPDF(nota);
                 Toast.makeText(VistaNota.this, "PDF guardado", Toast.LENGTH_SHORT).show();
             }
@@ -294,6 +293,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         if(nota.getRutaAudio() != null && !nota.getRutaAudio().equals("")){
             btPlay.setVisibility(View.VISIBLE);
         }
+        
         /*if(nota.getRecordatorio() != null && !nota.getRecordatorio().toString().substring(30).equals(d.toString().toString().substring(30))) {
             Log.v("recordatorio", nota.getRecordatorio().toString());
             tvRecordatorio.setText(nota.getRecordatorio().toString());

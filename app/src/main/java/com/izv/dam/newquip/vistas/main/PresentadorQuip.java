@@ -27,13 +27,8 @@ public class PresentadorQuip implements ContratoMain.InterfacePresentador{
             @Override
             protected Cursor[] doInBackground(Void... voids) {
                 Cursor[] cs = new Cursor[2];
-                if(PresentadorQuip.this.modelo.getCursorNotas() == null || PresentadorQuip.this.modelo.getCursorTareas() == null){
-                    cs[0] = PresentadorQuip.this.modelo.loadCursorNotas(0);
-                    cs[1] = PresentadorQuip.this.modelo.loadCursorTareas();
-                }else{
-                    cs[0] = PresentadorQuip.this.modelo.getCursorNotas();
-                    cs[1] = PresentadorQuip.this.modelo.getCursorTareas();
-                }
+                cs[0] = PresentadorQuip.this.modelo.getCursorNotas();
+                cs[1] = PresentadorQuip.this.modelo.getCursorTareas();
                 return cs;
             }
 
@@ -41,6 +36,7 @@ public class PresentadorQuip implements ContratoMain.InterfacePresentador{
             protected void onPostExecute(Cursor[] cs) {
                 PresentadorQuip.this.vista.showProgressBar(false);
                 PresentadorQuip.this.vista.showNotas(cs[0], cs[1]);
+                PresentadorQuip.this.vista.showSelectedFilter(PresentadorQuip.this.modelo.getFilter());
             }
         }.execute();
     }
@@ -62,6 +58,11 @@ public class PresentadorQuip implements ContratoMain.InterfacePresentador{
     }
 
     @Override
+    public void onTryDeleteNota(int position) {
+        this.vista.showConfirmDeleteNota(this.modelo.getNota(position), position);
+    }
+
+    @Override
     public void onUpdateNota(int position, boolean value) {
         this.modelo.updateNota(position, value);
         this.vista.showNotas(this.modelo.getCursorNotas(), this.modelo.getCursorTareas());
@@ -70,5 +71,6 @@ public class PresentadorQuip implements ContratoMain.InterfacePresentador{
     @Override
     public void onLoadCursorNotas(int filter) {
         this.vista.showNotas(this.modelo.loadCursorNotas(filter), this.modelo.getCursorTareas());
+        this.vista.showSelectedFilter(this.modelo.getFilter());
     }
 }

@@ -22,6 +22,7 @@
     <string name="nav_recordatorios">Recordatorios</string>
     <string name="nav_completadas">Completadas</string>
     <string name="nav_no_completadas">No Completadas</string>
+    <string name="nav_preferencias">Preferencias</string>
     //Strings de los bottom sheets
     <string name="tituloBSVistaNota">Desde...</string>
     <string name="BtAddFoto">Camara</string>
@@ -31,5 +32,12 @@
     <string name="BtAddlista">Lista</string>
     <string name="tarea">tarea</string>
 
-
+    //Strings layout preferencias
+    <string name="default_filter">Sección inicial</string>
+    <string name="all">Todas</string>
+    <string name="notes">Notas</string>
+    <string name="lists">Listas</string>
+    <string name="with_reminder">Con recordatorio</string>
+    <string name="completed">Completadas</string>
+    <string name="not_completed">No completadas</string>
 </resources>
