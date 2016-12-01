@@ -110,7 +110,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
                 txtNota = txtNota.substring(0, 18) + "...";
             }
             holder.tvText.setText(txtNota);
-        }else if(nota.getTitulo() != null && nota.getTitulo().equals("") && nota.getTipo() == Nota.NOTA_SIMPLE){
+        }else if((nota.getTitulo() == null || nota.getTitulo().equals("")) && nota.getTipo() == Nota.NOTA_SIMPLE){
             txtNota=nota.getNota();
             StringTokenizer str = new StringTokenizer(txtNota, "\n");
             txtNota = str.nextToken();

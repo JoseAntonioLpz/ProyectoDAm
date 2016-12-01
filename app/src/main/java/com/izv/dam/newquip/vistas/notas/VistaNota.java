@@ -118,6 +118,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
             public void onClick(View v) {
                 dtAudio.setVisibility(View.VISIBLE);
                 a.grabar();
+                addAudio.setVisibility(View.GONE);
             }
         });
         dtAudio.setOnClickListener(new View.OnClickListener() {
@@ -128,6 +129,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 nota.setRutaAudio(archivoAudio.getAbsolutePath());
                 btPlay.setVisibility(View.VISIBLE);
                 dtAudio.setVisibility(View.GONE);
+                addAudio.setVisibility(View.VISIBLE);
                 Toast.makeText(VistaNota.this, "Audio guardado", Toast.LENGTH_SHORT).show();
             }
         });
