@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="nota" type="com.izv.dam.newquip.pojo.Nota"/>
     </data>
     <RelativeLayout
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -26,6 +26,13 @@
             android:layout_below="@+id/toolbar3"
             android:id="@+id/linearLayout"
             android:paddingTop="16dp">
+
+            <TextView
+                android:text="@={nota.recordatorio}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvRecordatorio"
+                android:layout_weight="0.98" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -83,5 +90,15 @@
             android:id="@+id/ivPdf"
             android:layout_alignTop="@+id/ivBorrar"
             android:layout_alignEnd="@+id/btnFlotNotList" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_alarm_black_24dp"
+            android:id="@+id/ibRecordatorio"
+            style="@style/Widget.AppCompat.ImageButton"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/ivBorrar" />
+
     </RelativeLayout>
 </layout>

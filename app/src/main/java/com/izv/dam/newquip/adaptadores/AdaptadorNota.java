@@ -54,6 +54,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
         public TextView tvTareas;
         public ImageView ivImage;
         public ImageView ivAudio;
+        public ImageView ivRecordatorio;
         public TextView tvFecha;
         public TextView tvText;
 
@@ -65,6 +66,7 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
             tvText = (TextView) itemView.findViewById(R.id.tvText);
             ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
             ivAudio = (ImageView) itemView.findViewById(R.id.ivAudio);
+            ivRecordatorio = (ImageView) itemView.findViewById(R.id.ivRecordatorio);
         }
     }
 
@@ -129,7 +131,13 @@ public class AdaptadorNota extends RecyclerView.Adapter<AdaptadorNota.ViewHolder
             if(nota.getRutaAudio() != null && !nota.getRutaAudio().equals("")){
                 holder.ivAudio.setVisibility(View.VISIBLE);
             }
+            if (nota.getRecordatorio() !=null && !nota.getRecordatorio().equals("")){
+                holder.ivRecordatorio.setVisibility(View.VISIBLE);
+            }
         }else if(nota.getTipo() == Nota.NOTA_LISTA){
+            if (nota.getRecordatorio() !=null && !nota.getRecordatorio().equals("")){
+                holder.ivRecordatorio.setVisibility(View.VISIBLE);
+            }
             nota.setTareas(cursorTareas);
             if(!nota.getTareas().isEmpty()) {
                 int totalElementos = nota.getTareas().size();

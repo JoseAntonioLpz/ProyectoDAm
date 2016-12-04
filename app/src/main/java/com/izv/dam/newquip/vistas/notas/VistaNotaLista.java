@@ -1,8 +1,10 @@
 package com.izv.dam.newquip.vistas.notas;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +17,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.izv.dam.newquip.R;
@@ -25,6 +29,7 @@ import com.izv.dam.newquip.databinding.ActivityNotaListaBinding;
 import com.izv.dam.newquip.pdf.Pdf;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.pojo.Tarea;
+import com.izv.dam.newquip.vistas.recordatorio.VistaRecordatorio;
 
 import java.util.Date;
 import java.util.List;
@@ -42,8 +47,12 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
     private Nota nota = new Nota();
     private ImageView ivPdf;
     private ImageView ivBorrar;
+    private ImageButton ibRecordatorio;
+    private TextView tvRecordatorio;
     private AppCompatActivity yo = this;
     private Context context = this;
+
+    public static final int ACTIVIDAD_CALENDARIO = 111;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,12 +80,11 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
             @Override
             public void onClick(View v) {
                 for (int i = nota.getTareas().size()-1 ; i >= 0 ; i--) {
-                    Toast.makeText(yo, "Tareas borradas" , Toast.LENGTH_SHORT).show();
                     presentador.onRemoveTarea(nota.getTareas().get(i).getId());
                     nota.getTareas().remove(i);
                     adaptador.notifyItemRemoved(i);
                 }
-
+                Toast.makeText(yo, "Tareas borradas" , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -147,7 +155,35 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                 rvTareas.scrollToPosition(0);
             }
         });
+        tvRecordatorio = (TextView) findViewById(R.id.tvRecordatorio);
+        ibRecordatorio = (ImageButton) findViewById(R.id.ibRecordatorio);
+        ibRecordatorio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, VistaRecordatorio.class);
+                Bundle b = new Bundle();
+                b.putParcelable("nota",nota);
+                intent.putExtras(b);
+                startActivityForResult(intent,ACTIVIDAD_CALENDARIO);
+            }
+        });
         binding.setNota(nota);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            switch (requestCode){
+                case ACTIVIDAD_CALENDARIO:
+                    String recordatorio = data.getExtras().getString("fechaModificada");
+                    nota.setRecordatorio(recordatorio);
+                    if (nota.getRecordatorio() !=null){
+                        tvRecordatorio.setText(nota.getRecordatorio().toString());
+                    }
+                    break;
+            }
+        }
     }
 
     @Override

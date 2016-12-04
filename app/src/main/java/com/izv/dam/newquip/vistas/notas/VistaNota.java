@@ -249,7 +249,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                     String recordatorio = data.getExtras().getString("fechaModificada");
                     nota.setRecordatorio(recordatorio);
                     if (nota.getRecordatorio() !=null){
-                        tvRecordatorio.setText("Recordatorio: " + nota.getRecordatorio().toString());
+                        tvRecordatorio.setText(nota.getRecordatorio().toString());
                     }
                     saveNota();
                     break;
