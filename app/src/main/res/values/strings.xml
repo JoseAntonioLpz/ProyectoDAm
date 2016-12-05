@@ -40,4 +40,9 @@
     <string name="with_reminder">Con recordatorio</string>
     <string name="completed">Completadas</string>
     <string name="not_completed">No completadas</string>
+
+    //Strings widget
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_nota">Nueva nota</string>
+    <string name="add_lista">Nueva lista</string>
 </resources>

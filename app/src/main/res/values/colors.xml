@@ -7,4 +7,5 @@
     <color name="colorNavDrawer">#FF009688</color>
     <color name="colorNotaSimple">#FFA8D573</color>
     <color name="colorNotaLista">#B2DFDB</color>
+    <color name="transparent">#0000</color>
 </resources>

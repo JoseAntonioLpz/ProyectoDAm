@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -18,9 +17,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.izv.dam.newquip.R;
 import com.izv.dam.newquip.adaptadores.AdaptadorTarea;
@@ -45,13 +42,12 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
     private RecyclerView rvTareas;
     private AdaptadorTarea adaptador;
     private Nota nota = new Nota();
-    private ImageView ivPdf;
-    private ImageView ivBorrar;
-    private ImageButton ibRecordatorio;
-    private TextView tvRecordatorio;
+    private ImageButton ivPdf;
+    private ImageButton ivBorrar;
+    private ImageButton ivRecordatorio;
     private AppCompatActivity yo = this;
     private Context context = this;
-
+    private TextView tvRecordatorio;
     public static final int ACTIVIDAD_CALENDARIO = 111;
 
     @Override
@@ -64,7 +60,7 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
 
         presentador = new PresentadorNotaLista(this);
 
-        ivPdf = (ImageView) findViewById(R.id.ivPdf);
+        ivPdf = (ImageButton) findViewById(R.id.ivPdf);
         //PDFS
         final Pdf p = new Pdf(yo,context);
         ivPdf.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +70,7 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
             }
         });
 
-        ivBorrar = (ImageView) findViewById(R.id.ivBorrar);
+        ivBorrar = (ImageButton) findViewById(R.id.ivBorrar);
         //BorrarTodo
         ivBorrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +80,7 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                     nota.getTareas().remove(i);
                     adaptador.notifyItemRemoved(i);
                 }
-                Toast.makeText(yo, "Tareas borradas" , Toast.LENGTH_SHORT).show();
+
             }
         });
 
@@ -100,6 +96,7 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
 
             @Override
             public void afterTextChanged(Editable editable) {
+                //TODO Creo que aqui esta el error, mete la palabra titulo como si se hubiera cambiado el texto y lo inserta como titulo.
                 nota.setTitulo(editable.toString());
             }
         });
@@ -156,8 +153,8 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
             }
         });
         tvRecordatorio = (TextView) findViewById(R.id.tvRecordatorio);
-        ibRecordatorio = (ImageButton) findViewById(R.id.ibRecordatorio);
-        ibRecordatorio.setOnClickListener(new View.OnClickListener() {
+        ivRecordatorio = (ImageButton) findViewById(R.id.ivRecordatorio);
+        ivRecordatorio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, VistaRecordatorio.class);
@@ -180,6 +177,7 @@ public class VistaNotaLista extends AppCompatActivity implements ContratoNotaLis
                     nota.setRecordatorio(recordatorio);
                     if (nota.getRecordatorio() !=null){
                         tvRecordatorio.setText(nota.getRecordatorio().toString());
+                        tvRecordatorio.setVisibility(View.VISIBLE);
                     }
                     break;
             }

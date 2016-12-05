@@ -63,7 +63,7 @@ public class ModeloNotaLista implements ContratoNotaLista.InterfaceModelo  {
                         n.getContentValues(false)
                 )
         );
-        if(n.getTareas() != null) {
+        if (n.getTareas() != null) {
             for (Tarea t : n.getTareas()) {
                 t.setIdNota(id);
                 t.setId(insertTarea(t));

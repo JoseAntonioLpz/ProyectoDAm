@@ -29,10 +29,11 @@
 
             <TextView
                 android:text="@={nota.recordatorio}"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tvRecordatorio"
-                android:layout_weight="0.98" />
+                android:visibility="visible"
+                android:layout_marginLeft="20dp"/>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -49,6 +50,7 @@
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:text="@={nota.titulo}"
                     android:layout_weight="1" />
+
             </android.support.design.widget.TextInputLayout>
 
         </LinearLayout>
@@ -72,33 +74,35 @@
             android:id="@+id/rvTareas"
             android:paddingRight="16dp"
             android:paddingLeft="16dp" />
-
-        <ImageView
+        <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/borrar_listas_24dp"
+            app:srcCompat="@drawable/ic_alarm_black_24dp"
+            android:id="@+id/ivRecordatorio"
+            android:layout_marginEnd="50dp"
+            android:layout_marginTop="11dp"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@+id/ivPdf"
+            android:background="@color/transparent" />
+        <ImageButton
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/ic_clear_all_black_24dp"
             android:id="@+id/ivBorrar"
             android:layout_marginEnd="12dp"
             android:layout_marginTop="11dp"
             android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/ivPdf" />
+            android:layout_toStartOf="@+id/ivPdf"
+            android:background="@color/transparent" />
 
-        <ImageView
+        <ImageButton
             android:layout_width="30dp"
             android:layout_height="30dp"
             app:srcCompat="@drawable/ic_picture_as_pdf_black_24dp"
             android:id="@+id/ivPdf"
             android:layout_alignTop="@+id/ivBorrar"
-            android:layout_alignEnd="@+id/btnFlotNotList" />
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_alarm_black_24dp"
-            android:id="@+id/ibRecordatorio"
-            style="@style/Widget.AppCompat.ImageButton"
-            android:layout_alignParentTop="true"
-            android:layout_toStartOf="@+id/ivBorrar" />
+            android:layout_alignEnd="@+id/btnFlotNotList"
+            android:background="@color/transparent" />
 
     </RelativeLayout>
 </layout>

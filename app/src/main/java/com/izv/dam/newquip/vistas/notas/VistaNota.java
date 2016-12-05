@@ -8,13 +8,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +27,6 @@ import com.izv.dam.newquip.databinding.ActivityNotaBinding;
 import com.izv.dam.newquip.pdf.Pdf;
 import com.izv.dam.newquip.pojo.Nota;
 import com.izv.dam.newquip.vistas.drawer.VistaDrawer;
-import com.izv.dam.newquip.vistas.main.VistaQuip;
 import com.izv.dam.newquip.vistas.recordatorio.VistaRecordatorio;
 
 import java.io.File;
@@ -43,13 +42,13 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
     private Nota nota = new Nota();
     private PresentadorNota presentador;
     private ImageView imagen;
-    private ImageView addFoto;
-    private ImageView addGaleria;
-    private ImageView addAudio;
-    private ImageView dtAudio;
-    private ImageView addDibujo;
-    private ImageView btPDF;
-    private ImageView btRecordatorio;
+    private ImageButton addFoto;
+    private ImageButton addGaleria;
+    private ImageButton addAudio;
+    private ImageButton dtAudio;
+    private ImageButton addDibujo;
+    private ImageButton btPDF;
+    private ImageButton btRecordatorio;
     private TextView tvRecordatorio;
     private File archivoAudio;
     private Button btPlay;
@@ -74,7 +73,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         editTextNota = (EditText) findViewById(R.id.etNota);
         imagen = (ImageView)findViewById(R.id.imagenCargada);
         btPlay = (Button) findViewById(R.id.btPlay);
-        btRecordatorio = (ImageView)findViewById(R.id.btRecordatorio);
+        btRecordatorio = (ImageButton) findViewById(R.id.btRecordatorio);
         tvRecordatorio = (TextView)findViewById(R.id.recordatorio);
 
         if (savedInstanceState != null) {
@@ -92,11 +91,11 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         System.out.println("Nota 1" + nota.toString());
         mostrarNota(nota);
 
-        addFoto = (ImageView) findViewById(R.id.ivAddFoto);
-        addGaleria = (ImageView) findViewById(R.id.ivAddGaleria);
-        addAudio = (ImageView) findViewById(R.id.ivAddAudio);
-        addDibujo = (ImageView) findViewById(R.id.ivAddDibujo);
-        dtAudio = (ImageView) findViewById(R.id.ivDetenerAudio);
+        addFoto = (ImageButton) findViewById(R.id.ivAddFoto);
+        addGaleria = (ImageButton) findViewById(R.id.ivAddGaleria);
+        addAudio = (ImageButton) findViewById(R.id.ivAddAudio);
+        addDibujo = (ImageButton) findViewById(R.id.ivAddDibujo);
+        dtAudio = (ImageButton) findViewById(R.id.ivDetenerAudio);
 
         addFoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +117,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
             public void onClick(View v) {
                 dtAudio.setVisibility(View.VISIBLE);
                 a.grabar();
-                addAudio.setVisibility(View.GONE);
             }
         });
         dtAudio.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +127,6 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 nota.setRutaAudio(archivoAudio.getAbsolutePath());
                 btPlay.setVisibility(View.VISIBLE);
                 dtAudio.setVisibility(View.GONE);
-                addAudio.setVisibility(View.VISIBLE);
                 Toast.makeText(VistaNota.this, "Audio guardado", Toast.LENGTH_SHORT).show();
             }
         });
@@ -149,7 +146,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         });
         //PDF
         final Pdf p = new Pdf(yo,context);
-        btPDF = (ImageView)findViewById(R.id.btPDF);
+        btPDF = (ImageButton) findViewById(R.id.btPDF);
         btPDF.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 p.generarPDF(nota);
@@ -249,7 +246,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                     String recordatorio = data.getExtras().getString("fechaModificada");
                     nota.setRecordatorio(recordatorio);
                     if (nota.getRecordatorio() !=null){
-                        tvRecordatorio.setText(nota.getRecordatorio().toString());
+                        tvRecordatorio.setText("Recordatorio: " + nota.getRecordatorio().toString());
                     }
                     saveNota();
                     break;

@@ -26,9 +26,8 @@
             android:parentActivityName=".vistas.main.VistaQuip"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan">
-            <!--
-            TODO Quitar adjustPan y sustituir por otro
-            -->
+
+            <!-- TODO Quitar adjustPan y sustituir por otro -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".vistas.main.VistaQuip" />
@@ -67,13 +66,24 @@
             android:authorities="com.izv.dam.newquip.notas"
             android:enabled="true" />
 
-        <activity android:name=".vistas.preferencias.VistaPreferencias"
+        <activity
+            android:name=".vistas.preferencias.VistaPreferencias"
             android:parentActivityName=".vistas.main.VistaQuip"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".vistas.main.VistaQuip" />
         </activity>
+
+        <receiver android:name=".vistas.widget.WidgetNoteLauncher">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_note_launcher_info" />
+        </receiver>
     </application>
 
 </manifest>

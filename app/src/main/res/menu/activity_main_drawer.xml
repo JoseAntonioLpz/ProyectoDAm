@@ -12,7 +12,7 @@
             android:title="@string/nav_notas" />
         <item
             android:id="@+id/nav_listas"
-            android:icon="@drawable/ic_format_list_bulleted_black_24dp"
+            android:icon="@drawable/ic_widget_list"
             android:title="@string/nav_listas" />
         <item
             android:id="@+id/nav_recordatorios"

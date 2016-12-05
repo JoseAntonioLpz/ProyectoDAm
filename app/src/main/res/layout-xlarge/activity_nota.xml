@@ -21,60 +21,74 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-                <ImageView
+                <ImageButton
                     android:layout_width="75dp"
                     android:layout_height="75dp"
-                    android:padding="10dp"
                     app:srcCompat="@drawable/ic_menu_camera"
                     android:id="@+id/ivAddFoto"
-                    android:layout_weight="0.25"/>
+                    android:layout_weight="0.25"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
 
-                <ImageView
+                <ImageButton
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     app:srcCompat="@drawable/ic_menu_gallery"
-                    android:padding="10dp"
                     android:id="@+id/ivAddGaleria"
-                    android:layout_weight="0.25"/>
-                <ImageView
+                    android:layout_weight="0.25"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
+                <ImageButton
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     app:srcCompat="@drawable/ic_alarm_black_24dp"
-                    android:padding="10dp"
                     android:id="@+id/btRecordatorio"
-                    android:layout_weight="0.25"/>
+                    android:layout_weight="0.25"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
 
-                <ImageView
+                <ImageButton
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     app:srcCompat="@drawable/ic_picture_as_pdf_black_24dp"
                     android:id="@+id/btPDF"
-                    android:padding="10dp"
-                    android:layout_weight="0.25"/>
-                <ImageView
+                    android:layout_weight="0.25"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
+                <ImageButton
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     app:srcCompat="@drawable/ic_create_black_24dp"
-                    android:padding="10dp"
                     android:id="@+id/ivAddDibujo"
-                    android:layout_weight="0.25"/>
+                    android:layout_weight="0.25"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
 
-                <ImageView
+                <ImageButton
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     app:srcCompat="@drawable/ic_mic_black_24dp"
-                    android:padding="10dp"
                     android:id="@+id/ivAddAudio"
                     android:layout_weight="0.25"
-                    android:visibility="visible"/>
-                <ImageView
+                    android:visibility="visible"
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
+                <ImageButton
                     app:srcCompat="@drawable/ic_mic_off_black_24dp"
                     android:id="@+id/ivDetenerAudio"
                     android:visibility="gone"
                     android:layout_width="75dp"
                     android:layout_height="75dp"
                     android:layout_weight="0.25"
-                    android:padding="10dp"/>
+                    android:background="@color/transparent"
+                    android:scaleType="centerCrop"
+                    android:padding="40dp"/>
 
 
 
@@ -96,7 +110,8 @@
                 android:layout_height="300dp"
                 android:layout_weight="1.19"
                 android:layout_marginBottom="350px"
-                android:visibility="visible" />
+                android:visibility="visible"
+                android:background="@color/transparent"/>
 
             <LinearLayout
                 android:orientation="horizontal"
