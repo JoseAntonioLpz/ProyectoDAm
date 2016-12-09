@@ -51,7 +51,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
     private ImageButton btRecordatorio;
     private TextView tvRecordatorio;
     private File archivoAudio;
-    private Button btPlay;
+    private ImageButton btPlay;
     private AppCompatActivity yo = this;
     private Context context = this;
     private Camara c = new Camara(yo);
@@ -72,7 +72,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
         editTextTitulo = (EditText) findViewById(R.id.etTitulo);
         editTextNota = (EditText) findViewById(R.id.etNota);
         imagen = (ImageView)findViewById(R.id.imagenCargada);
-        btPlay = (Button) findViewById(R.id.btPlay);
+        btPlay = (ImageButton) findViewById(R.id.btPlay);
         btRecordatorio = (ImageButton) findViewById(R.id.btRecordatorio);
         tvRecordatorio = (TextView)findViewById(R.id.recordatorio);
 
@@ -116,6 +116,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
             @Override
             public void onClick(View v) {
                 dtAudio.setVisibility(View.VISIBLE);
+                addAudio.setVisibility(View.GONE);
                 a.grabar();
             }
         });
@@ -126,6 +127,7 @@ public class VistaNota extends AppCompatActivity implements ContratoNota.Interfa
                 archivoAudio = a.getArchivo();
                 nota.setRutaAudio(archivoAudio.getAbsolutePath());
                 btPlay.setVisibility(View.VISIBLE);
+                addAudio.setVisibility(View.VISIBLE);
                 dtAudio.setVisibility(View.GONE);
                 Toast.makeText(VistaNota.this, "Audio guardado", Toast.LENGTH_SHORT).show();
             }

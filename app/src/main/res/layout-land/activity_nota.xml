@@ -63,15 +63,18 @@
                     android:padding="10dp"
                     android:background="@color/transparent"
                     android:id="@+id/ivAddAudio"
-                    android:layout_weight="0.25"/>
+                    android:layout_weight="0.25"
+                    android:visibility="visible"/>
 
-                <!--<ImageView
+                <ImageButton
                     android:layout_width="wrap_content"
+                    app:srcCompat="@drawable/ic_mic_off_black_24dp"
+                    android:id="@+id/ivDetenerAudio"
+                    android:layout_weight="0.25"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_menu_manage"
-                    android:padding="10dp"
-                    android:id="@+id/imageView7"
-                    android:layout_weight="0.25"/>-->
+                    android:background="@color/transparent"
+                    android:visibility="gone"
+                    android:padding="10dp"/>
             </TableRow>
         </TableLayout>
 
@@ -188,23 +191,11 @@
                     android:paddingBottom="10dp"/>
 
                 <ImageButton
-                    android:layout_width="100dp"
-                    app:srcCompat="@drawable/ic_mic_off_black_24dp"
-                    android:id="@+id/ivDetenerAudio"
-                    android:layout_alignParentTop="true"
-                    android:layout_toStartOf="@+id/btSave"
-                    android:layout_weight="0.30"
-                    android:layout_height="30dp"
-                    android:background="@color/transparent"
-                    android:visibility="gone" />
-
-                <Button
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:id="@+id/btPlay"
                     android:visibility="gone"
-                    android:background="@android:drawable/ic_lock_silent_mode_off"
-                    android:text="Play"
+                    android:background="@drawable/play"
                     android:layout_weight="1" />
             </LinearLayout>
         </LinearLayout>

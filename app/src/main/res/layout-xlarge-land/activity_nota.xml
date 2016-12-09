@@ -95,13 +95,12 @@
                         android:visibility="visible"
                         android:background="@color/transparent"/>
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <ImageButton
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:id="@+id/btPlay"
-                        android:visibility="visible"
-                        android:background="@android:drawable/ic_lock_silent_mode_off"
-                        android:text="Play" />
+                        android:visibility="gone"
+                        android:background="@drawable/play" />
 
                     <TextView
                         android:layout_width="wrap_content"
