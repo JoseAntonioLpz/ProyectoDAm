@@ -93,8 +93,8 @@ public class Pdf{
             try {
                 worker.parseXHtml(pdfWriter, document, new StringReader(htmlToPDF));
                 document.close();
-                Toast.makeText(yo, "Se esta imprimiendo en PDF", Toast.LENGTH_SHORT).show();
-                muestraPDF(nombre_completo, yo);
+                Toast.makeText(yo, "¡PDF guardado!", Toast.LENGTH_SHORT).show();
+                //muestraPDF(nombre_completo, yo);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -108,7 +108,7 @@ public class Pdf{
 
     }
 
-    public void muestraPDF(String pdf, Context context){
+    /*public void muestraPDF(String pdf, Context context){
         Toast.makeText(context, "Leyendo el PDF", Toast.LENGTH_SHORT).show();
         File file = new File(pdf);
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -122,5 +122,5 @@ public class Pdf{
         }catch (ActivityNotFoundException e){
             Toast.makeText(context, "No tiene una aplicacion que abra PDF", Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }

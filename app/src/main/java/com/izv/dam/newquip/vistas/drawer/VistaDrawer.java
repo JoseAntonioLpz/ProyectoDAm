@@ -1,15 +1,12 @@
 package com.izv.dam.newquip.vistas.drawer;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -44,7 +41,6 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
     float pmediano;
     float pgrande;
     float pdefecto;
-    int GUARDAR_DIBUJO = 200;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,21 +105,22 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
 
             case R.id.grande:
                 lienzo.setTamanyoPunto(pgrande);
-                Toast.makeText(getApplicationContext(),"ha seleccionado el tamaño: grande",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Tamaño seleccionado: grande",Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.mediano:
                 lienzo.setTamanyoPunto(pmediano);
-                Toast.makeText(getApplicationContext(),"ha seleccionado el tamaño: mediano",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Tamaño seleccionado: mediano",Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.pequeno:
                 lienzo.setTamanyoPunto(ppequenyo);
-                Toast.makeText(getApplicationContext(),"ha seleccionado el tamaño: pequeño",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Tamaño seleccionado: pequeño",Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.goma:
                 lienzo.setColor("#ffffff");//BLANCO
+                Toast.makeText(getApplicationContext(),"Goma de borrar",Toast.LENGTH_SHORT).show();
                 return true;
 
             case R.id.guardar:
@@ -169,14 +166,11 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
                     }
                 });
                 salvarDibujo.show();
-
-
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
-
     }
 
     @Override
@@ -187,22 +181,27 @@ public class VistaDrawer extends AppCompatActivity implements View.OnClickListen
             case R.id.colornegro:
                 color = v.getTag().toString();
                 lienzo.setColor(color);
+                Toast.makeText(getApplicationContext(),"Color seleccionado: Negro",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.colorverde:
                 color = v.getTag().toString();
                 lienzo.setColor(color);
+                Toast.makeText(getApplicationContext(),"Color seleccionado: Verde",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.colorazul:
                 color = v.getTag().toString();
                 lienzo.setColor(color);
+                Toast.makeText(getApplicationContext(),"Color seleccionado: Azul",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.colorrojo:
                 color = v.getTag().toString();
                 lienzo.setColor(color);
+                Toast.makeText(getApplicationContext(),"Color seleccionado: Rojo",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.coloramarillo:
                 color = v.getTag().toString();
                 lienzo.setColor(color);
+                Toast.makeText(getApplicationContext(),"Color seleccionado: Amarillo",Toast.LENGTH_SHORT).show();
                 break;
             default:
 
